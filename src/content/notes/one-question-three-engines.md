@@ -7,7 +7,7 @@ map: engines
 mapCaption: Central North Sea fields and pipelines. The demo's Compare view draws each engine's answer as a ring, one inside the other.
 ---
 
-For most of my career, the GIS software came first. You picked a platform, learnt its tools, and the platform shaped how you thought about the problem.
+In GIS, the software has usually come first. You pick a platform, learn its tools, and the platform shapes how you think about the problem.
 
 So here's a question I wanted to test. If you ask in plain English and AI writes the analysis, does the engine underneath still matter?
 
