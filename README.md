@@ -47,3 +47,10 @@ npm run build    # output in dist/
 4. Optional: Web Analytics on the project, which is cookie-free.
 
 Every pull request then gets its own preview URL.
+
+## Editing an article in the browser
+
+1. Open the live site once with `?edit=1` on the end of any address (e.g. `https://asktobler.ai/notes/why-a-lab/?edit=1`). That browser now shows an **Edit this page on GitHub** link under each note and archive post. Nobody else sees it. Use `?edit=0` to hide it again.
+2. The link opens the article's Markdown file in GitHub's editor. Change the text, click **Commit changes**, and Cloudflare rebuilds the site in about a minute.
+
+**Images.** Either drag a picture straight into the GitHub editor (GitHub hosts it and inserts the Markdown for you), or, to keep images in the repo, upload them to `public/images/` with *Add file → Upload files* and write `![What the picture shows](/images/my-picture.jpg)` in the article. The text in square brackets is the alt text for screen readers.

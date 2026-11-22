@@ -1,6 +1,7 @@
 ---
 import { render } from "astro:content";
 import Base from "../../layouts/Base.astro";
+import EditLink from "../../components/EditLink.astro";
 import { getArchive, formatDate } from "../../lib/notes";
 
 export async function getStaticPaths() {
@@ -27,6 +28,7 @@ const where = fromLinkedIn ? "LinkedIn" : "the Spatial Miscellany";
     {fromLinkedIn
       ? <p class="note ui">First published on LinkedIn on {formatDate(d.date)}. <a href={d.original}>See the original and its comments</a>.</p>
       : <p class="note ui">Kept as originally written. Images haven't survived, and links go to archived copies. <a href={d.original}>See the original page</a>.</p>}
+    <EditLink file={post.filePath} />
     <nav class="pager ui" aria-label="More from the archive">
       {prev ? <a href={`/archive/${prev.id}`}>Older: {prev.data.title}</a> : <span />}
       {next ? <a href={`/archive/${next.id}`}>Newer: {next.data.title}</a> : <span />}

@@ -2,6 +2,7 @@
 import { render } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import Map from "../../components/Map.astro";
+import EditLink from "../../components/EditLink.astro";
 import { getNotes, formatDate } from "../../lib/notes";
 
 export async function getStaticPaths() {
@@ -27,6 +28,7 @@ const d = note.data;
     )}
     <div class="prose"><Content /></div>
     {d.linkedin && <p class="origin ui">First published on LinkedIn on {formatDate(d.date)}. <a href={d.linkedin}>See the original and its comments</a>.</p>}
+    <EditLink file={note.filePath} />
     <p class="back ui"><a href="/notes">All notes</a></p>
   </article>
 </Base>
