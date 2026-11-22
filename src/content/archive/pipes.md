@@ -1,6 +1,7 @@
 ---
 title: '|pipes.yahoo.com|'
 date: 2007-02-12
+source: spatial-miscellany
 original: 'https://web.archive.org/web/2007/http://gisconsultancy.com/blog/xml/pipes/'
 ---
 

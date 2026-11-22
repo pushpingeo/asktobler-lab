@@ -1,6 +1,7 @@
 ---
 title: 'Faster web mapping with Google’s new browser?'
 date: 2008-10-09
+source: spatial-miscellany
 original: 'https://web.archive.org/web/2008/http://gisconsultancy.com/blog/google/faster-web-mapping-with-google%e2%80%99s-new-browser/'
 ---
 

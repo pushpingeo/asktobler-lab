@@ -15,7 +15,10 @@ from markdownify import markdownify
 
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "archive-source" / "linkedin"
-OUT = ROOT / "src" / "content" / "notes"
+NOTES = ROOT / "src" / "content" / "notes"
+ARCHIVE = ROOT / "src" / "content" / "archive"
+# Pieces that belong with the lab's own questions go in Notes; the rest go to the Archive.
+IN_NOTES = {"rethinking-laws-of-geography", "will-gis-analysts-exist-in-2035"}
 
 # file stem -> (slug, kind, summary)
 ARTICLES = {
@@ -71,17 +74,17 @@ def main():
     for stem, (slug, kind, summary) in ARTICLES.items():
         title, url, published, md = convert(SRC / f"{stem}.html")
         title = re.sub(r"^[^\w\"']+", "", title).strip()  # drop leading emoji
-        fm = (
-            "---\n"
-            f"title: '{title.replace(chr(39), chr(39) * 2)}'\n"
-            f"date: {published}\n"
-            f"summary: '{summary.replace(chr(39), chr(39) * 2)}'\n"
-            f"kind: {kind}\n"
-            f"linkedin: '{url}'\n"
-            "---\n\n"
-        )
-        (OUT / f"{slug}.md").write_text(fm + md + "\n")
-        print(slug, published, len(md))
+        q = lambda v: "'" + v.replace("'", "''") + "'"
+        if slug in IN_NOTES:
+            fm = f"---\ntitle: {q(title)}\ndate: {published}\nsummary: {q(summary)}\nkind: {kind}\nlinkedin: {q(url)}\n---\n\n"
+            dest = NOTES
+        else:
+            fm = f"---\ntitle: {q(title)}\ndate: {published}\nsource: linkedin\noriginal: {q(url)}\n---\n\n"
+            dest = ARCHIVE
+        for d in (NOTES, ARCHIVE):
+            (d / f"{slug}.md").unlink(missing_ok=True)
+        (dest / f"{slug}.md").write_text(fm + md + "\n")
+        print(slug, published, dest.name)
 
 
 if __name__ == "__main__":

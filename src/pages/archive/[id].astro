@@ -5,20 +5,28 @@ import { getArchive, formatDate } from "../../lib/notes";
 
 export async function getStaticPaths() {
   const posts = await getArchive();
-  return posts.map((post, i) => ({ params: { id: post.id }, props: { post, prev: posts[i - 1], next: posts[i + 1] } }));
+  return posts.map((post) => {
+    const same = posts.filter((p) => p.data.source === post.data.source);
+    const i = same.indexOf(post);
+    return { params: { id: post.id }, props: { post, prev: same[i - 1], next: same[i + 1] } };
+  });
 }
 const { post, prev, next } = Astro.props;
 const { Content } = await render(post);
 const d = post.data;
+const fromLinkedIn = d.source === "linkedin";
+const where = fromLinkedIn ? "LinkedIn" : "the Spatial Miscellany";
 ---
-<Base title={d.title} description={`From the Spatial Miscellany, ${formatDate(d.date)}.`}>
+<Base title={d.title} description={`From ${where}, ${formatDate(d.date)}.`}>
   <article class="wrap">
     <header>
-      <p class="meta ui"><a href="/archive">Archive</a>: from the Spatial Miscellany, {formatDate(d.date)}</p>
+      <p class="meta ui"><a href="/archive">Archive</a>: from {where}, {formatDate(d.date)}</p>
       <h1>{d.title}</h1>
     </header>
     <div class="prose"><Content /></div>
-    <p class="note ui">Kept as originally written. Images haven't survived, and links go to archived copies. <a href={d.original}>See the original page</a>.</p>
+    {fromLinkedIn
+      ? <p class="note ui">First published on LinkedIn on {formatDate(d.date)}. <a href={d.original}>See the original and its comments</a>.</p>
+      : <p class="note ui">Kept as originally written. Images haven't survived, and links go to archived copies. <a href={d.original}>See the original page</a>.</p>}
     <nav class="pager ui" aria-label="More from the archive">
       {prev ? <a href={`/archive/${prev.id}`}>Older: {prev.data.title}</a> : <span />}
       {next ? <a href={`/archive/${next.id}`}>Newer: {next.data.title}</a> : <span />}

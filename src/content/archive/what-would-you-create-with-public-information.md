@@ -1,6 +1,7 @@
 ---
 title: 'What would you create with Public Information?'
 date: 2008-07-03
+source: spatial-miscellany
 original: 'https://web.archive.org/web/2008/http://gisconsultancy.com/blog/geoweb/what-would-you-create-with-public-information/'
 ---
 

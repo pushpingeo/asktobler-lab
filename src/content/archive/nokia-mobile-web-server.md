@@ -1,6 +1,7 @@
 ---
 title: 'Nokia Mobile Web Server - a game changer…'
 date: 2008-06-19
+source: spatial-miscellany
 original: 'https://web.archive.org/web/2008/http://gisconsultancy.com/blog/mobile-gis/nokia-mobile-web-server-a-game-changer/'
 ---
 

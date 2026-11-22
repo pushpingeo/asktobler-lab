@@ -1,6 +1,7 @@
 ---
 title: 'The Power of Information…'
 date: 2009-02-09
+source: spatial-miscellany
 original: 'https://web.archive.org/web/2009/http://gisconsultancy.com/blog/data/the-power-of-information/'
 ---
 

@@ -32,6 +32,6 @@ Some of it will end up in Tobler, a site-screening tool I'm building. Most of it
 
 Waldo Tobler's first law of geography says that everything is related to everything else, but near things are more related than distant things.
 
-It's the nearest thing my field has to a motto. It's also most of site screening in a sentence. And it turns out maps and AI are very near things.
+It's the nearest thing my field has to a motto. It's also most of site screening in a sentence. And it turns out geography and AI are very near things.
 
 Everything here is built in my own time, on open data, and the views are my own. If something is useful, or wrong, I'd like to hear about it.

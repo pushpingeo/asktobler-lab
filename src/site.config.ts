@@ -2,7 +2,7 @@
 export const SITE = {
   name: "Tobler Lab",
   url: "https://asktobler.ai",
-  tagline: "Near things are more related. So are maps and AI.",
+  tagline: "Near things are more related. So are geography and AI.",
   description:
     "Rob Dunfey's open lab: small, working experiments in what happens when AI becomes the interface to geography.",
   author: "Rob Dunfey",

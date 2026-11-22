@@ -1,6 +1,7 @@
 ---
 title: 'GIS Software Above the Level of a Single Device'
 date: 2008-06-17
+source: spatial-miscellany
 original: 'https://web.archive.org/web/2008/http://gisconsultancy.com/blog/mobile-gis/gis-software-above-the-level-of-a-single-device/'
 ---
 

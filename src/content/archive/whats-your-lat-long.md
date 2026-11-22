@@ -1,6 +1,7 @@
 ---
 title: 'What’s your Lat \ Long?'
 date: 2008-01-12
+source: spatial-miscellany
 original: 'https://web.archive.org/web/2008/http://gisconsultancy.com/blog/microsoft/what%e2%80%99s-your-lat-long/'
 ---
 

@@ -1,6 +1,7 @@
 ---
 title: 'OneGeology'
 date: 2007-03-09
+source: spatial-miscellany
 original: 'https://web.archive.org/web/2007/http://gisconsultancy.com/blog/xml/onegeology/'
 ---
 

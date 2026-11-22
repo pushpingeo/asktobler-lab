@@ -1,6 +1,7 @@
 ---
 title: 'The Royal Mail PAF, that old Chestnut…'
 date: 2008-07-10
+source: spatial-miscellany
 original: 'https://web.archive.org/web/2008/http://gisconsultancy.com/blog/politics/the-royal-mail-paf-that-old-chestnut/'
 ---
 

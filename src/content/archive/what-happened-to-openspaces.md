@@ -1,6 +1,7 @@
 ---
 title: 'What happened to Openspaces?'
 date: 2007-04-19
+source: spatial-miscellany
 original: 'https://web.archive.org/web/2007/http://gisconsultancy.com/blog/google/what-happened-to-openspaces/'
 ---
 

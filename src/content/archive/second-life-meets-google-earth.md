@@ -1,6 +1,7 @@
 ---
 title: 'What happens when Second Life meets Google Earth?'
 date: 2007-08-24
+source: spatial-miscellany
 original: 'https://web.archive.org/web/2007/http://gisconsultancy.com/blog/google/what-happens-when-second-life-meets-google-earth/'
 ---
 

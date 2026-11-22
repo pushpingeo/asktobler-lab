@@ -1,9 +1,8 @@
 ---
 title: 'GeoAI: A Few Useful Links and Perspectives'
 date: 2025-07-31
-summary: 'A short reading list on GeoAI: the big picture, research, big tech and a searchable planet.'
-kind: field note
-linkedin: 'https://www.linkedin.com/pulse/geoai-few-useful-links-perspectives-rob-dunfey-odvkf'
+source: linkedin
+original: 'https://www.linkedin.com/pulse/geoai-few-useful-links-perspectives-rob-dunfey-odvkf'
 ---
 
 The pace of change in AI and geospatial technology is staggering—and it's not just about better models or more data. It’s also about how we *understand* the implications of these systems: ethically, practically, and geopolitically.

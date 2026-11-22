@@ -1,6 +1,7 @@
 ---
 title: 'A next generation web mapping API…'
 date: 2010-08-08
+source: spatial-miscellany
 original: 'https://web.archive.org/web/2010/http://gisconsultancy.com/blog/arcgis-server-ags/a-next-generation-web-mapping-api/'
 ---
 

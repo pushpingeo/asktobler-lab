@@ -1,6 +1,7 @@
 ---
 title: 'Mobile Phone tracking with a Nokia N95 & MWS'
 date: 2008-07-06
+source: spatial-miscellany
 original: 'https://web.archive.org/web/2008/http://gisconsultancy.com/blog/mobile-gis/mobile-phone-tracking-with-a-nokia-n95-mws/'
 ---
 

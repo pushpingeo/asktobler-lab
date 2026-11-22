@@ -86,7 +86,8 @@ def main():
     posts = json.load(open(SRC))
     OUT.mkdir(parents=True, exist_ok=True)
     for old in OUT.glob("*.md"):
-        old.unlink()
+        if "source: linkedin" not in old.read_text():
+            old.unlink()
     n = 0
     for p in posts:
         path = p["key"][len(BLOG):]
@@ -98,7 +99,7 @@ def main():
         original = wayback("http://" + p["key"] + "/", d.year)
         body = clean(p["md"], d.year)
         (OUT / f"{slug}.md").write_text(
-            f"---\ntitle: '{title}'\ndate: {d.isoformat()}\noriginal: '{original}'\n---\n\n{body}\n"
+            f"---\ntitle: '{title}'\ndate: {d.isoformat()}\nsource: spatial-miscellany\noriginal: '{original}'\n---\n\n{body}\n"
         )
         n += 1
     print(f"Wrote {n} posts to {OUT}")

@@ -1,9 +1,8 @@
 ---
 title: 'Here Comes Everybody...The Power of Surveying without the Surveyor'
 date: 2017-06-11
-summary: 'A consumer drone, a museum in Miri and a weekend of processing: what amateurisation might mean for surveying.'
-kind: essay
-linkedin: 'https://www.linkedin.com/pulse/here-comes-everybodythe-power-surveying-without-surveyor-rob-dunfey'
+source: linkedin
+original: 'https://www.linkedin.com/pulse/here-comes-everybodythe-power-surveying-without-surveyor-rob-dunfey'
 ---
 
 I shamelessly steal my title from the Clay Shirkey book that popularised the idea of '[mass amateurisation](https://www.ted.com/talks/clay_shirky_on_institutions_versus_collaboration)':

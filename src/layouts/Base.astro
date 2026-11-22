@@ -10,7 +10,6 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 const nav = [
   { href: "/projects", label: "Projects" },
   { href: "/notes", label: "Notes" },
-  { href: "/archive", label: "Archive" },
   { href: "/about", label: "About" },
 ];
 const canonical = new URL(Astro.url.pathname, SITE.url);
@@ -55,6 +54,7 @@ const canonical = new URL(Astro.url.pathname, SITE.url);
           {SITE.links.github && <a href={SITE.links.github}>GitHub</a>}
           {SITE.links.linkedin && <a href={SITE.links.linkedin}>LinkedIn</a>}
           {SITE.links.email && <a href={`mailto:${SITE.links.email}`}>Email</a>}
+          <a href="/archive">Archive</a>
           <a href="/rss.xml">RSS</a>
         </nav>
       </div>

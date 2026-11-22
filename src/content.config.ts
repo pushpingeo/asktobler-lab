@@ -19,13 +19,14 @@ const notes = defineCollection({
   }),
 });
 
-// Posts from the Spatial Miscellany (2007-2010), kept as written.
+// Earlier writing, kept as written: the Spatial Miscellany blog (2007-2010) and LinkedIn articles.
 const archive = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/archive" }),
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
-    original: z.string().url(), // Internet Archive copy of the original post
+    source: z.enum(["spatial-miscellany", "linkedin"]),
+    original: z.string().url(), // the original post (an Internet Archive copy for the blog)
   }),
 });
 

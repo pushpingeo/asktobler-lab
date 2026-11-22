@@ -1,9 +1,8 @@
 ---
 title: 'Reflections on ''Positioning the Future Geospatial Information Ecosystem'''
 date: 2025-08-06
-summary: 'The UN-GGIM paper on the future geospatial ecosystem, and the question of where spatial analysis fits.'
-kind: essay
-linkedin: 'https://www.linkedin.com/pulse/reflections-positioning-future-geospatial-information-rob-dunfey-xi36f'
+source: linkedin
+original: 'https://www.linkedin.com/pulse/reflections-positioning-future-geospatial-information-rob-dunfey-xi36f'
 ---
 
 🌐 **The Future Ecosystem is Here - Where's the Spatial Analysis?** 🌍

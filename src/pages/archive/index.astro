@@ -2,36 +2,57 @@
 import Base from "../../layouts/Base.astro";
 import { getArchive, formatDate } from "../../lib/notes";
 const posts = await getArchive();
-const years = [...new Set(posts.map((p) => p.data.date.getFullYear()))];
+const linkedin = posts.filter((p) => p.data.source === "linkedin").reverse();
+const blog = posts.filter((p) => p.data.source === "spatial-miscellany");
+const years = [...new Set(blog.map((p) => p.data.date.getFullYear()))];
 ---
-<Base title="Archive" description="Posts from the Spatial Miscellany, a geospatial blog from 2007 to 2010.">
+<Base title="Archive" description="Earlier writing on geography and technology: LinkedIn articles and the Spatial Miscellany blog, 2007 to 2025.">
   <section class="wrap">
     <h1>Archive</h1>
-    <div class="intro">
-      <p>Before this lab there was the Spatial Miscellany, a blog I kept from about 2005 to 2010. It was mostly about open data, the geoweb, and whatever I'd been tinkering with at the weekend.</p>
-      <p>These posts were recovered from the Internet Archive and are kept as written, typos and all. The images didn't survive. Links go to archived copies, since most of the sites have gone.</p>
-    </div>
-    {years.map((y) => (
-      <section class="year">
-        <h2>{y}</h2>
-        <ol class="list">
-          {posts.filter((p) => p.data.date.getFullYear() === y).map((p) => (
-            <li>
-              <a href={`/archive/${p.id}`}>{p.data.title}</a>
-              <span class="ui date">{formatDate(p.data.date)}</span>
-            </li>
-          ))}
-        </ol>
-      </section>
-    ))}
+    <p class="intro">Earlier writing, from before the lab. All of it is kept as written, so some of it shows its age.</p>
+
+    <section class="group">
+      <h2>On LinkedIn</h2>
+      <p class="group-intro">Articles I published on LinkedIn. Each links back to the original and its comments.</p>
+      <ol class="list">
+        {linkedin.map((p) => (
+          <li>
+            <a href={`/archive/${p.id}`}>{p.data.title}</a>
+            <span class="ui date">{formatDate(p.data.date)}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="group">
+      <h2>The Spatial Miscellany</h2>
+      <p class="group-intro">A blog I kept from about 2005 to 2010, mostly about open data, the geoweb and whatever I'd been tinkering with at the weekend. These posts were recovered from the Internet Archive. The images didn't survive, and links go to archived copies, since most of the sites have gone.</p>
+      {years.map((y) => (
+        <div class="year">
+          <h3>{y}</h3>
+          <ol class="list">
+            {blog.filter((p) => p.data.date.getFullYear() === y).map((p) => (
+              <li>
+                <a href={`/archive/${p.id}`}>{p.data.title}</a>
+                <span class="ui date">{formatDate(p.data.date)}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      ))}
+    </section>
   </section>
 </Base>
 <style>
   h1 { margin: 1.5rem 0 1rem; }
   .intro { font-size: 1.15rem; max-width: 36rem; margin-bottom: 2.5rem; color: var(--ink-soft); }
-  .year { display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: 1rem; padding: 1.4rem 0; border-top: 1px solid var(--rule); }
-  .year h2 { font-size: 1.6rem; }
-  .list { list-style: none; margin: 0; padding: 0; max-width: 40rem; }
+  .group { margin-bottom: 3.5rem; }
+  .group h2 { margin-bottom: 0.8rem; }
+  .group-intro { color: var(--ink-soft); max-width: 40rem; margin-bottom: 1.4rem; }
+  .year { display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: 1rem; padding: 1.2rem 0; border-top: 1px solid var(--rule); }
+  .year h3 { font-size: 1.4rem; }
+  .list { list-style: none; margin: 0; padding: 0; max-width: 46rem; }
+  .group > .list { border-top: 1px solid var(--rule); padding-top: 1rem; }
   .list li { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; padding: 0.35rem 0; }
   .list a { font-weight: 600; text-decoration: none; }
   .list a:hover { text-decoration: underline; text-decoration-color: var(--orange); }
