@@ -26,6 +26,7 @@ const d = note.data;
       </figure>
     )}
     <div class="prose"><Content /></div>
+    {d.linkedin && <p class="origin ui">First published on LinkedIn on {formatDate(d.date)}. <a href={d.linkedin}>See the original and its comments</a>.</p>}
     <p class="back ui"><a href="/notes">All notes</a></p>
   </article>
 </Base>
@@ -39,4 +40,5 @@ const d = note.data;
   .lead-map :global(svg.map-hero) { max-height: 75vh; width: auto; max-width: 100%; }
   .lead-map figcaption { color: var(--ink-soft); margin-top: 0.6rem; }
   .back { margin-top: 3rem; }
+  .origin { max-width: var(--measure); margin-top: 2.5rem; padding: 0.9rem 1.1rem; background: var(--tint); border-radius: 10px; color: var(--ink-soft); }
 </style>
