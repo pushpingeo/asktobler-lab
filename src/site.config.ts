@@ -14,7 +14,7 @@ export const SITE = {
   // Leave a link empty to hide it.
   links: {
     github: "https://github.com/pushpingeo",
-    linkedin: "", // e.g. https://www.linkedin.com/in/...
+    linkedin: "https://www.linkedin.com/in/robdunfey/",
     email: "", // e.g. hello@asktobler.ai
   },
 };
