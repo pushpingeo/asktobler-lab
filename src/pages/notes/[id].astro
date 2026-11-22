@@ -32,10 +32,11 @@ const d = note.data;
 <style>
   .note header { max-width: 44rem; margin: 1.5rem 0 2rem; }
   .meta { color: var(--ink-soft); margin-bottom: 0.6rem; }
-  .summary { font-size: 1.3rem; font-style: italic; color: var(--ink-soft); margin-top: 1rem; }
+  .summary { font-size: 1.3rem; font-weight: 500; color: var(--ink-soft); margin-top: 1.2rem; line-height: 1.4; }
   .lead-map { margin: 0 0 2.5rem; max-width: 44rem; }
-  .lead-map :global(.map-wrap) { aspect-ratio: 16 / 10; overflow: hidden; border-radius: 3px; }
-  .lead-map :global(svg) { height: 100%; }
+  .lead-map :global(.map-wrap) { overflow: hidden; border-radius: 14px; }
+  .lead-map :global(svg.map-thumb) { aspect-ratio: 16 / 10; height: auto; }
+  .lead-map :global(svg.map-hero) { max-height: 75vh; width: auto; max-width: 100%; }
   .lead-map figcaption { color: var(--ink-soft); margin-top: 0.6rem; }
   .back { margin-top: 3rem; }
 </style>

@@ -18,9 +18,9 @@ const notes = (await getNotes()).slice(0, 4);
         geography. Most of them run in your browser, on open data.
       </p>
       <p class="lede">Some work. Some don't. Both get written up.</p>
-      <p class="hero-links ui">
-        <a href="/projects">See the projects</a>
-        <a href="/notes/why-a-lab">Why a lab</a>
+      <p class="hero-links">
+        <a class="btn" href="/projects">See the projects</a>
+        <a class="btn btn-dark" href="/notes/why-a-lab">Why a lab</a>
       </p>
     </div>
     <figure class="hero-map">
@@ -42,7 +42,7 @@ const notes = (await getNotes()).slice(0, 4);
   <section class="wrap block">
     <div class="block-head">
       <h2>What I'm working on</h2>
-      <a class="ui" href="/projects">All projects</a>
+      <a class="all" href="/projects">All projects</a>
     </div>
     {projects.slice(0, 3).map((p) => <ProjectRow project={p} />)}
   </section>
@@ -50,7 +50,7 @@ const notes = (await getNotes()).slice(0, 4);
   <section class="wrap block">
     <div class="block-head">
       <h2>Latest notes</h2>
-      <a class="ui" href="/notes">All notes</a>
+      <a class="all" href="/notes">All notes</a>
     </div>
     <NoteList notes={notes} />
   </section>
@@ -58,16 +58,14 @@ const notes = (await getNotes()).slice(0, 4);
 
 <style>
   .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; padding-top: clamp(1rem, 4vw, 3rem); }
-  .hero h1 { margin-bottom: 1.6rem; max-width: 13ch; }
-  .lede { font-size: 1.2rem; max-width: 30rem; }
-  .hero-links { display: flex; gap: 1.4rem; font-size: 0.95rem; margin-top: 1.6rem; }
-  .hero-links a:first-child { background: var(--blue); color: #fff; text-decoration: none; padding: 0.6rem 1rem; border-radius: 3px; }
-  .hero-links a:first-child:hover { background: #000; }
-  .hero-links a:last-child { align-self: center; }
+  .hero h1 { margin-bottom: 1.8rem; max-width: 12ch; }
+  .lede { font-size: 1.2rem; max-width: 30rem; color: var(--ink-soft); }
+  .hero-links { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 2rem; }
   .hero-map { margin: 0; }
   .credit { margin: 0.6rem 0 0; max-width: 34rem; }
   .block { margin-top: clamp(4rem, 8vw, 6.5rem); }
-  .block-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.2rem; }
+  .block-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.4rem; }
+  .all { font-weight: 600; font-size: 0.95rem; }
   @media (max-width: 52rem) {
     .hero { grid-template-columns: 1fr; }
     .hero h1 { max-width: 16ch; }

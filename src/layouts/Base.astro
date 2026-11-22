@@ -35,7 +35,7 @@ const canonical = new URL(Astro.url.pathname, SITE.url);
     <a class="skip" href="#main">Skip to content</a>
     <header class="site-head">
       <div class="wrap">
-        <a class="wordmark" href="/">Tobler Lab<span>asktobler.ai</span></a>
+        <a class="wordmark" href="/">Tobler Lab</a>
         <nav class="nav" aria-label="Main">
           {nav.map((n) => (
             <a href={n.href} aria-current={path.startsWith(n.href) ? "page" : undefined}>{n.label}</a>
@@ -44,10 +44,13 @@ const canonical = new URL(Astro.url.pathname, SITE.url);
       </div>
     </header>
     <main id="main"><slot /></main>
-    <footer class="site-foot ui">
+    <footer class="site-foot">
       <div class="wrap">
-        <p>Built in my own time, on open data. Views are my own, not my employer's.</p>
-        <nav aria-label="Elsewhere">
+        <div>
+          <p class="foot-name">Tobler Lab</p>
+          <p class="ui">Built in my own time, on open data. Views are my own, not my employer's.</p>
+        </div>
+        <nav class="ui" aria-label="Elsewhere">
           {SITE.links.github && <a href={SITE.links.github}>GitHub</a>}
           {SITE.links.linkedin && <a href={SITE.links.linkedin}>LinkedIn</a>}
           {SITE.links.email && <a href={`mailto:${SITE.links.email}`}>Email</a>}

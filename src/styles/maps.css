@@ -1,3 +1,19 @@
+@import "@fontsource-variable/newsreader/opsz.css";
+@import "@fontsource-variable/newsreader/opsz-italic.css";
+
+/* The maps keep their own colours, separate from the site's. Cartography gets its own rethink later. */
+.map, .key {
+  --orange: #d4743a;
+  --blue: #31414e;
+  --blue-light: #6d8291;
+  --rule: #d4d7da;
+  --map-sea: #f2f4f5;
+  --land: #e7e5e0;
+  --ink: #000000;
+  --ink-soft: #5c5f62;
+  --serif: "Newsreader Variable", Georgia, serif;
+}
+
 /* Styles for the inline SVG maps made by scripts/make_maps.py */
 .map .m-sea { fill: var(--map-sea); }
 .map .m-paper { fill: var(--map-sea); }

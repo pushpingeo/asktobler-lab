@@ -1,23 +1,17 @@
-@import "@fontsource-variable/newsreader/opsz.css";
-@import "@fontsource-variable/newsreader/opsz-italic.css";
-@import "@fontsource-variable/instrument-sans";
+@import "@fontsource-variable/manrope";
 
-/* White page, black and grey text, two Farrow & Ball accents (approximate screen values). */
+/* White page. Hague Blue does the job black would; the orange is for fills and marks, never small text. */
 :root {
   --bg: #ffffff;
-  --map-sea: #f2f4f5;
-  --ink: #000000;
-  --ink-soft: #5c5f62;
-  --rule: #d4d7da;
-  --blue: #31414e;      /* Hague Blue */
-  --blue-light: #6d8291;
-  --orange: #d4743a;    /* Dutch Orange */
-  --land: #e7e5e0;
+  --ink: #31414e;        /* Hague Blue (approximate screen value) */
+  --ink-soft: #5c6670;
+  --rule: #e2e5e8;
+  --orange: #e69f43;
+  --tint: #f5f6f7;
 
-  --serif: "Newsreader Variable", Georgia, serif;
-  --sans: "Instrument Sans Variable", system-ui, sans-serif;
+  --sans: "Manrope Variable", system-ui, sans-serif;
 
-  --measure: 38rem;
+  --measure: 40rem;
   --gutter: clamp(1.25rem, 4vw, 3rem);
 }
 
@@ -26,60 +20,69 @@
 html {
   background: var(--bg);
   color: var(--ink);
-  font-family: var(--serif);
+  font-family: var(--sans);
   font-size: 112.5%;
-  line-height: 1.6;
-  font-optical-sizing: auto;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
   -webkit-text-size-adjust: 100%;
 }
 
 body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
 main { flex: 1; }
 
-a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
-a:hover { text-decoration-thickness: 2px; }
-a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; border-radius: 2px; }
+a { color: var(--ink); text-decoration-color: var(--orange); text-decoration-thickness: 2px; text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 3px; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--orange); outline-offset: 3px; border-radius: 4px; }
 
-h1, h2, h3 { font-weight: 500; line-height: 1.15; margin: 0; text-wrap: balance; }
-h1 { font-size: clamp(2.3rem, 5vw, 3.6rem); letter-spacing: -0.015em; }
-h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); letter-spacing: -0.01em; }
-h3 { font-size: 1.35rem; }
+h1, h2, h3 { font-weight: 700; line-height: 1.02; margin: 0; text-wrap: balance; }
+h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); letter-spacing: -0.045em; }
+h2 { font-size: clamp(1.8rem, 3.4vw, 2.6rem); letter-spacing: -0.04em; }
+h3 { font-size: 1.4rem; letter-spacing: -0.025em; line-height: 1.15; }
 p { margin: 0 0 1em; }
 
-.wrap { width: 100%; max-width: 72rem; margin: 0 auto; padding: 0 var(--gutter); }
+.wrap { width: 100%; max-width: 74rem; margin: 0 auto; padding: 0 var(--gutter); }
 
 /* Small UI text: navigation, dates, status. */
-.ui { font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.01em; }
+.ui { font-size: 0.8rem; letter-spacing: 0; }
+
+/* Pill buttons */
+.btn { display: inline-block; padding: 0.7rem 1.3rem; border-radius: 999px; font-weight: 600; font-size: 0.95rem; text-decoration: none; background: var(--orange); color: var(--ink); }
+.btn:hover { background: var(--ink); color: #fff; }
+.btn-dark { background: var(--ink); color: #fff; }
+.btn-dark:hover { background: var(--orange); color: var(--ink); }
 
 .skip { position: absolute; left: -999px; }
 .skip:focus { left: 1rem; top: 1rem; background: var(--ink); color: #fff; padding: 0.5rem 0.75rem; z-index: 10; }
 
 /* Header */
-.site-head { padding: 1.4rem 0; }
-.site-head .wrap { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
-.wordmark { font-size: 1.35rem; font-style: italic; font-weight: 500; color: var(--ink); text-decoration: none; }
-.wordmark span { font-style: normal; font-family: var(--sans); font-size: 0.75rem; color: var(--ink-soft); margin-left: 0.4rem; vertical-align: 0.15em; }
-.nav { display: flex; gap: 1.4rem; }
-.nav a { color: var(--ink); text-decoration: none; font-family: var(--sans); font-size: 0.9rem; padding: 0.2rem 0; border-bottom: 1.5px solid transparent; }
+.site-head { padding: 1.5rem 0; }
+.site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.wordmark { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.04em; color: var(--ink); text-decoration: none; display: inline-flex; align-items: center; gap: 0.35rem; }
+.wordmark::after { content: ""; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--orange); }
+.nav { display: flex; gap: 1.6rem; align-items: center; }
+.nav a { color: var(--ink); text-decoration: none; font-size: 0.92rem; font-weight: 500; padding: 0.2rem 0; border-bottom: 2px solid transparent; }
 .nav a:hover, .nav a[aria-current="page"] { border-bottom-color: var(--orange); }
 
-/* Footer */
-.site-foot { margin-top: 6rem; padding: 2.5rem 0 3rem; border-top: 1px solid var(--rule); }
-.site-foot .wrap { display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; color: var(--ink-soft); }
-.site-foot nav { display: flex; gap: 1.2rem; flex-wrap: wrap; }
-.site-foot a { color: var(--ink-soft); }
+/* Footer: Hague Blue band */
+.site-foot { margin-top: 7rem; padding: 3.5rem 0; background: var(--ink); color: #fff; }
+.site-foot .wrap { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; flex-wrap: wrap; }
+.site-foot .foot-name { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.04em; margin: 0 0 0.4rem; color: #fff; }
+.site-foot p { margin: 0; color: #d3d9de; }
+.site-foot nav { display: flex; gap: 1.4rem; flex-wrap: wrap; }
+.site-foot a { color: #fff; }
 
 /* Prose for notes and About */
-.prose { max-width: var(--measure); font-size: 1.12rem; line-height: 1.7; }
-.prose h2 { font-size: 1.55rem; margin: 2.2rem 0 0.8rem; }
-.prose h3 { margin: 1.8rem 0 0.6rem; }
+.prose { max-width: var(--measure); font-size: 1.08rem; line-height: 1.65; }
+.prose h2 { font-size: 1.7rem; margin: 2.6rem 0 0.9rem; }
+.prose h3 { margin: 2rem 0 0.6rem; }
 .prose ul, .prose ol { padding-left: 1.3rem; margin: 0 0 1.1em; }
 .prose li { margin-bottom: 0.35em; }
-.prose blockquote { margin: 1.6rem 0; padding-left: 1.2rem; border-left: 3px solid var(--orange); font-style: italic; font-size: 1.2rem; }
-.prose code { font-size: 0.88em; background: var(--map-sea); padding: 0.08em 0.3em; border-radius: 3px; }
+.prose li::marker { color: var(--orange); }
+.prose blockquote { margin: 1.8rem 0; padding-left: 1.2rem; border-left: 4px solid var(--orange); font-size: 1.25rem; font-weight: 600; }
+.prose code { font-size: 0.88em; background: var(--tint); padding: 0.08em 0.3em; border-radius: 4px; }
 .prose hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
 
 /* Maps */
 .map-wrap svg { display: block; width: 100%; height: auto; }
-.thumb { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 3px; }
+.thumb { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 14px; }
 .thumb svg { height: 100%; }
