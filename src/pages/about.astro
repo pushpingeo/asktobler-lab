@@ -1,0 +1,34 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../site.config";
+---
+<Base title="About" description="Rob Dunfey: twenty years making maps useful, now building in public at the edge of geography and AI.">
+  <section class="wrap about">
+    <div class="photo" role="img" aria-label="Photo of Rob Dunfey (coming soon)">
+      <span class="ui">Photo coming</span>
+    </div>
+    <div class="prose">
+      <h1>About</h1>
+      <p>I'm Rob Dunfey. I work in geospatial data, and I live in Scotland.</p>
+      <p>I started as a product engineer at Esri, on a small team building ArcGIS Explorer: a free 3D globe we shipped four times a year and that was downloaded about a million times. Then I moved into energy, and spent seventeen years in geomatics, with postings in The Hague and Sarawak along the way. Today I lead a geospatial team.</p>
+      <p>Most of that time has been about making spatial data useful to people who don't make maps for a living. AI changes how that works, and I'd rather find out how by building than by reading about it. So this lab is where I build small things, test them properly, and write up what happened.</p>
+      <p>My view so far: AI makes a good GIS analyst faster and more thorough. It doesn't replace one. I'll change my mind if the experiments say otherwise.</p>
+      <h2>The name</h2>
+      <p>Waldo Tobler's first law of geography says that everything is related to everything else, but near things are more related than distant things. It's the nearest thing my field has to a motto. Tobler is also the name of the site-screening tool I'm building, which will live at asktobler.com once it's ready.</p>
+      <h2>Get in touch</h2>
+      <p>If something here is useful, wrong, or worth a conversation, I'd like to hear about it.
+        {SITE.links.linkedin && <> Find me on <a href={SITE.links.linkedin}>LinkedIn</a>.</>}
+        {SITE.links.email && <> Email <a href={`mailto:${SITE.links.email}`}>{SITE.links.email}</a>.</>}
+        {" "}The code for everything is on <a href={SITE.links.github}>GitHub</a>.
+      </p>
+      <p class="small">Everything here is built in my own time, on open data. Views are my own, not my employer's.</p>
+    </div>
+  </section>
+</Base>
+<style>
+  .about { display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: clamp(1.5rem, 5vw, 4rem); align-items: start; margin-top: 1.5rem; }
+  .about h1 { margin-bottom: 1.2rem; }
+  .photo { aspect-ratio: 4 / 5; background: var(--sea-deep); border: 1px dashed var(--depth); border-radius: 3px; display: grid; place-items: center; color: var(--ink-soft); }
+  .small { font-size: 0.95rem; color: var(--ink-soft); }
+  @media (max-width: 44rem) { .about { grid-template-columns: 1fr; } .photo { max-width: 12rem; } }
+</style>

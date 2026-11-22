@@ -1,0 +1,76 @@
+---
+import Base from "../layouts/Base.astro";
+import Map from "../components/Map.astro";
+import ProjectRow from "../components/ProjectRow.astro";
+import NoteList from "../components/NoteList.astro";
+import { projects } from "../data/projects";
+import { SITE } from "../site.config";
+import { getNotes } from "../lib/notes";
+
+const notes = (await getNotes()).slice(0, 4);
+---
+<Base>
+  <section class="hero wrap">
+    <div class="hero-text">
+      <h1>{SITE.tagline}</h1>
+      <p class="lede">
+        I'm Rob Dunfey. I spent five years building mapping software at Esri, then seventeen in
+        geomatics in the energy industry. This is my open lab: small, working experiments in what
+        happens when AI becomes the way in to geography.
+      </p>
+      <p class="lede">Some of them work. Some don't. Both get written up.</p>
+      <p class="hero-links ui">
+        <a href="/projects">See the projects</a>
+        <a href="/notes/why-a-lab">Why a lab</a>
+      </p>
+    </div>
+    <figure class="hero-map">
+      <Map name="north-sea" />
+      <figcaption class="ui">
+        <div class="key" aria-hidden="true">
+          <span><i class="k-field"></i>Oil and gas fields</span>
+          <span><i class="k-pipe"></i>Pipelines</span>
+          <span><i class="k-wind"></i>Offshore wind</span>
+          <span><i class="k-lic"></i>Licences</span>
+          <span><i class="k-well"></i>Wells</span>
+        </div>
+        <p class="credit">The North Sea, drawn from open data: NSTA, The Crown Estate and Natural Earth.
+        The same data sits behind <a href="/projects#three-engines">One question, three engines</a>.</p>
+      </figcaption>
+    </figure>
+  </section>
+
+  <section class="wrap block">
+    <div class="block-head">
+      <h2>What I'm working on</h2>
+      <a class="ui" href="/projects">All projects</a>
+    </div>
+    {projects.slice(0, 3).map((p) => <ProjectRow project={p} />)}
+  </section>
+
+  <section class="wrap block">
+    <div class="block-head">
+      <h2>Latest notes</h2>
+      <a class="ui" href="/notes">All notes</a>
+    </div>
+    <NoteList notes={notes} />
+  </section>
+</Base>
+
+<style>
+  .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; padding-top: clamp(1rem, 4vw, 3rem); }
+  .hero h1 { margin-bottom: 1.6rem; max-width: 13ch; }
+  .lede { font-size: 1.2rem; max-width: 30rem; }
+  .hero-links { display: flex; gap: 1.4rem; font-size: 0.95rem; margin-top: 1.6rem; }
+  .hero-links a:first-child { background: var(--ink); color: var(--sea); text-decoration: none; padding: 0.6rem 1rem; border-radius: 3px; }
+  .hero-links a:first-child:hover { background: var(--magenta); }
+  .hero-links a:last-child { align-self: center; }
+  .hero-map { margin: 0; }
+  .credit { margin: 0.6rem 0 0; max-width: 34rem; }
+  .block { margin-top: clamp(4rem, 8vw, 6.5rem); }
+  .block-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.2rem; }
+  @media (max-width: 52rem) {
+    .hero { grid-template-columns: 1fr; }
+    .hero h1 { max-width: 16ch; }
+  }
+</style>

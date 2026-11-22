@@ -1,0 +1,50 @@
+/* Styles for the inline SVG maps made by scripts/make_maps.py */
+.map .m-sea { fill: var(--sea-deep); }
+.map .m-paper { fill: var(--sea-deep); }
+.map .m-neat { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+.map .m-grat path { stroke: var(--depth); stroke-width: 0.6; fill: none; opacity: 0.7; }
+.map .m-ticks path { stroke: var(--ink); stroke-width: 1.2; }
+.map .m-ticklabel text { font-family: var(--serif); font-style: italic; font-size: 15px; fill: var(--ink-soft); }
+.map .m-land { fill: var(--land); stroke: var(--ink); stroke-width: 0.6; stroke-linejoin: round; }
+.map .m-lic { fill: none; stroke: var(--depth); stroke-width: 0.7; }
+.map .m-wind { fill: var(--wind); fill-opacity: 0.18; stroke: var(--wind); stroke-width: 0.9; }
+.map .m-field { fill: var(--magenta); fill-opacity: 0.55; stroke: var(--magenta); stroke-width: 0.4; }
+.map .m-pipe { fill: none; stroke: var(--ink); stroke-width: 0.6; stroke-opacity: 0.7; stroke-linecap: round; }
+.map .m-well { stroke: var(--ink); stroke-width: 1.5; stroke-linecap: round; stroke-opacity: 0.35; }
+.map .m-lab-land { font-family: var(--serif); font-size: 17px; fill: var(--ink-soft); letter-spacing: 0.06em; }
+.map .m-lab-sea { font-family: var(--serif); font-style: italic; font-size: 26px; fill: var(--ink); letter-spacing: 0.12em; opacity: 0.8; }
+
+.map-thumb .m-field { fill-opacity: 0.5; stroke-width: 0.8; }
+.map-thumb .m-pipe { stroke-width: 1.2; }
+.map .m-ring { fill: none; stroke-width: 3; }
+.map .m-ring-a { stroke: var(--magenta); }
+.map .m-ring-b { stroke: var(--wind); }
+.map .m-ring-c { stroke: var(--ink); }
+
+.map .m-block { fill: var(--sea-deep); stroke: var(--depth); stroke-width: 1.2; }
+.map .m-hot { fill: var(--magenta); fill-opacity: 0.6; stroke: var(--magenta); stroke-width: 2; }
+.map .m-hot2 { fill: var(--wind); fill-opacity: 0.55; stroke: var(--wind); stroke-width: 2; }
+.map .m-blocklab { font-family: var(--sans); font-size: 17px; fill: var(--ink-soft); text-anchor: middle; dominant-baseline: middle; }
+
+.map .m-globe { fill: var(--sea-deep); stroke: var(--ink); stroke-width: 1.5; }
+.map .m-coast { fill: none; stroke: var(--ink); stroke-width: 1.1; stroke-linejoin: round; }
+.map-thumb .m-grat path { opacity: 1; }
+
+.chart-ntr .c-head { font-family: var(--serif); font-size: 26px; fill: var(--ink); }
+.chart-ntr .c-sub { font-family: var(--sans); font-size: 15px; fill: var(--ink-soft); }
+.chart-ntr .c-lab { font-family: var(--sans); font-size: 16px; fill: var(--ink); }
+.chart-ntr .c-num { font-family: var(--serif); font-size: 28px; fill: var(--ink); }
+.chart-ntr .c-bar { rx: 2; }
+.chart-ntr .c-off { fill: var(--depth); }
+.chart-ntr .c-on { fill: var(--magenta); }
+.chart-ntr .c-axis { stroke: var(--ink); stroke-width: 1.5; }
+
+/* Key under the big map */
+.key { display: flex; flex-wrap: wrap; gap: 0.4rem 1.2rem; margin-top: 0.8rem; color: var(--ink-soft); }
+.key span { display: inline-flex; align-items: center; gap: 0.45rem; }
+.key i { display: inline-block; width: 14px; height: 10px; }
+.key .k-field { background: color-mix(in srgb, var(--magenta) 60%, transparent); }
+.key .k-wind { background: color-mix(in srgb, var(--wind) 25%, transparent); outline: 1px solid var(--wind); outline-offset: -1px; }
+.key .k-pipe { height: 0; border-top: 1.5px solid var(--ink); }
+.key .k-lic { background: transparent; outline: 1px solid var(--depth); outline-offset: -1px; }
+.key .k-well { width: 4px; height: 4px; border-radius: 50%; background: var(--ink); opacity: 0.6; }

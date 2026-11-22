@@ -1,0 +1,9 @@
+---
+// Inlines one of the SVG maps from src/maps, so it picks up the site's fonts and colours.
+const maps = import.meta.glob("../maps/*.svg", { query: "?raw", import: "default", eager: true }) as Record<string, string>;
+interface Props { name: string; class?: string }
+const { name, class: cls } = Astro.props;
+const svg = maps[`../maps/${name}.svg`];
+if (!svg) throw new Error(`No map called ${name}`);
+---
+<div class:list={["map-wrap", cls]} set:html={svg} />

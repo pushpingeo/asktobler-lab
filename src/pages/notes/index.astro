@@ -1,0 +1,17 @@
+---
+import Base from "../../layouts/Base.astro";
+import NoteList from "../../components/NoteList.astro";
+import { getNotes } from "../../lib/notes";
+const notes = await getNotes();
+---
+<Base title="Notes" description="Write-ups of experiments, short essays and field notes on geography and AI.">
+  <section class="wrap">
+    <h1>Notes</h1>
+    <p class="intro">What I tried, what happened, and what I think it means. New ones about every two weeks. <a href="/rss.xml">Follow by RSS</a>.</p>
+    <NoteList notes={notes} />
+  </section>
+</Base>
+<style>
+  h1 { margin: 1.5rem 0 1rem; }
+  .intro { font-size: 1.2rem; max-width: 34rem; margin-bottom: 2.5rem; }
+</style>
