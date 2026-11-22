@@ -4,7 +4,7 @@ date: 2026-11-22
 summary: Twenty years of making maps useful, and why I'm now doing some of it in public.
 kind: essay
 map: north-sea
-mapCaption: The North Sea from open data. Fields in magenta, pipelines in ink, offshore wind in green.
+mapCaption: The North Sea from open data. Fields in orange, pipelines and offshore wind in blue.
 ---
 
 I've spent most of my working life making maps useful to people who don't make maps.

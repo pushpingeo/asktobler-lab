@@ -4,9 +4,7 @@ import { SITE } from "../site.config";
 ---
 <Base title="About" description="Rob Dunfey: twenty years making maps useful, now building in public at the edge of geography and AI.">
   <section class="wrap about">
-    <div class="photo" role="img" aria-label="Photo of Rob Dunfey (coming soon)">
-      <span class="ui">Photo coming</span>
-    </div>
+    <img class="photo" src="/rob.jpg" width="418" height="418" alt="Rob Dunfey, smiling, outdoors in a checked shirt" />
     <div class="prose">
       <h1>About</h1>
       <p>I'm Rob Dunfey. I work in geospatial data, and I live in Scotland.</p>
@@ -28,7 +26,7 @@ import { SITE } from "../site.config";
 <style>
   .about { display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: clamp(1.5rem, 5vw, 4rem); align-items: start; margin-top: 1.5rem; }
   .about h1 { margin-bottom: 1.2rem; }
-  .photo { aspect-ratio: 4 / 5; background: var(--sea-deep); border: 1px dashed var(--depth); border-radius: 3px; display: grid; place-items: center; color: var(--ink-soft); }
+  .photo { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 50%; }
   .small { font-size: 0.95rem; color: var(--ink-soft); }
   @media (max-width: 44rem) { .about { grid-template-columns: 1fr; } .photo { max-width: 12rem; } }
 </style>

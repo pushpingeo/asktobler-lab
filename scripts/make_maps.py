@@ -218,7 +218,8 @@ def simops(simops_dir, ns):
         (hot if "hot" in cls else body).append(f'<path class="{cls}" d="{d}"/>')
         c = g2.representative_point()
         x, y = p.xy(c.x, c.y)
-        body.append(f'<text class="m-blocklab" x="{x:.1f}" y="{y:.1f}">{pr["key"]}</text>')
+        lab = "m-blocklab m-blocklab-hot" if "hot" in cls else "m-blocklab"
+        hot.append(f'<text class="{lab}" x="{x:.1f}" y="{y:.1f}">{pr["key"]}</text>') if "hot" in cls else body.append(f'<text class="{lab}" x="{x:.1f}" y="{y:.1f}">{pr["key"]}</text>')
     body = hot[:0] + body + hot
     title = "UK licence blocks around 21/29, with the two blocks of the Gannet example picked out"
     return svg(p, "".join(body), title, "map-thumb")

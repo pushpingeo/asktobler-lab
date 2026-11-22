@@ -2,17 +2,17 @@
 @import "@fontsource-variable/newsreader/opsz-italic.css";
 @import "@fontsource-variable/instrument-sans";
 
-/* Colours borrowed from a nautical chart: pale water, dark ink, chart magenta. */
+/* White page, black and grey text, two Farrow & Ball accents (approximate screen values). */
 :root {
-  --sea: #eaf0ef;
-  --sea-deep: #dbe6e6;
-  --ink: #142b3f;
-  --ink-soft: #3f5568;
-  --magenta: #b0145a;
-  --magenta-soft: #e0457f;
-  --depth: #9bb8c2;
-  --land: #ded4b6;
-  --wind: #2c7d74;
+  --bg: #ffffff;
+  --map-sea: #f2f4f5;
+  --ink: #000000;
+  --ink-soft: #5c5f62;
+  --rule: #d4d7da;
+  --blue: #31414e;      /* Hague Blue */
+  --blue-light: #6d8291;
+  --orange: #d4743a;    /* Dutch Orange */
+  --land: #e7e5e0;
 
   --serif: "Newsreader Variable", Georgia, serif;
   --sans: "Instrument Sans Variable", system-ui, sans-serif;
@@ -24,7 +24,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
-  background: var(--sea);
+  background: var(--bg);
   color: var(--ink);
   font-family: var(--serif);
   font-size: 112.5%;
@@ -36,9 +36,9 @@ html {
 body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
 main { flex: 1; }
 
-a { color: var(--magenta); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+a { color: var(--blue); text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
 a:hover { text-decoration-thickness: 2px; }
-a:focus-visible, button:focus-visible { outline: 2px solid var(--magenta); outline-offset: 3px; border-radius: 2px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; border-radius: 2px; }
 
 h1, h2, h3 { font-weight: 500; line-height: 1.15; margin: 0; text-wrap: balance; }
 h1 { font-size: clamp(2.3rem, 5vw, 3.6rem); letter-spacing: -0.015em; }
@@ -52,7 +52,7 @@ p { margin: 0 0 1em; }
 .ui { font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.01em; }
 
 .skip { position: absolute; left: -999px; }
-.skip:focus { left: 1rem; top: 1rem; background: var(--ink); color: var(--sea); padding: 0.5rem 0.75rem; z-index: 10; }
+.skip:focus { left: 1rem; top: 1rem; background: var(--ink); color: #fff; padding: 0.5rem 0.75rem; z-index: 10; }
 
 /* Header */
 .site-head { padding: 1.4rem 0; }
@@ -61,10 +61,10 @@ p { margin: 0 0 1em; }
 .wordmark span { font-style: normal; font-family: var(--sans); font-size: 0.75rem; color: var(--ink-soft); margin-left: 0.4rem; vertical-align: 0.15em; }
 .nav { display: flex; gap: 1.4rem; }
 .nav a { color: var(--ink); text-decoration: none; font-family: var(--sans); font-size: 0.9rem; padding: 0.2rem 0; border-bottom: 1.5px solid transparent; }
-.nav a:hover, .nav a[aria-current="page"] { border-bottom-color: var(--magenta); }
+.nav a:hover, .nav a[aria-current="page"] { border-bottom-color: var(--orange); }
 
 /* Footer */
-.site-foot { margin-top: 6rem; padding: 2.5rem 0 3rem; border-top: 1px solid var(--depth); }
+.site-foot { margin-top: 6rem; padding: 2.5rem 0 3rem; border-top: 1px solid var(--rule); }
 .site-foot .wrap { display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; color: var(--ink-soft); }
 .site-foot nav { display: flex; gap: 1.2rem; flex-wrap: wrap; }
 .site-foot a { color: var(--ink-soft); }
@@ -75,9 +75,9 @@ p { margin: 0 0 1em; }
 .prose h3 { margin: 1.8rem 0 0.6rem; }
 .prose ul, .prose ol { padding-left: 1.3rem; margin: 0 0 1.1em; }
 .prose li { margin-bottom: 0.35em; }
-.prose blockquote { margin: 1.6rem 0; padding-left: 1.2rem; border-left: 3px solid var(--magenta); font-style: italic; font-size: 1.2rem; }
-.prose code { font-size: 0.88em; background: var(--sea-deep); padding: 0.08em 0.3em; border-radius: 3px; }
-.prose hr { border: 0; border-top: 1px solid var(--depth); margin: 2.5rem 0; }
+.prose blockquote { margin: 1.6rem 0; padding-left: 1.2rem; border-left: 3px solid var(--orange); font-style: italic; font-size: 1.2rem; }
+.prose code { font-size: 0.88em; background: var(--map-sea); padding: 0.08em 0.3em; border-radius: 3px; }
+.prose hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
 
 /* Maps */
 .map-wrap svg { display: block; width: 100%; height: auto; }
