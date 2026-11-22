@@ -9,3 +9,9 @@ export async function getNotes() {
 export function formatDate(d: Date) {
   return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
 }
+
+/** Spatial Miscellany posts, oldest first. */
+export async function getArchive() {
+  const all = await getCollection("archive");
+  return all.sort((a, b) => a.data.date.valueOf() - b.data.date.valueOf());
+}

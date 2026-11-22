@@ -5,9 +5,11 @@ import ProjectRow from "../components/ProjectRow.astro";
 import NoteList from "../components/NoteList.astro";
 import { projects } from "../data/projects";
 import { SITE } from "../site.config";
-import { getNotes } from "../lib/notes";
+import { getNotes, getArchive, formatDate } from "../lib/notes";
 
 const notes = (await getNotes()).slice(0, 4);
+const archivePicks = ["faster-web-mapping-chrome", "pipes", "gis-software-above-a-single-device"];
+const archive = (await getArchive()).filter((p) => archivePicks.includes(p.id));
 ---
 <Base>
   <section class="hero wrap">
@@ -54,6 +56,22 @@ const notes = (await getNotes()).slice(0, 4);
     </div>
     <NoteList notes={notes} />
   </section>
+
+  <section class="wrap block archive">
+    <div class="block-head">
+      <h2>From the archive</h2>
+      <a class="all" href="/archive">All archive posts</a>
+    </div>
+    <p class="archive-intro">Before this lab there was the Spatial Miscellany, a blog I kept from about 2005 to 2010. Some of it still holds up.</p>
+    <ul class="picks">
+      {archive.map((p) => (
+        <li>
+          <p class="ui year">{formatDate(p.data.date)}</p>
+          <a href={`/archive/${p.id}`}>{p.data.title}</a>
+        </li>
+      ))}
+    </ul>
+  </section>
 </Base>
 
 <style>
@@ -66,7 +84,14 @@ const notes = (await getNotes()).slice(0, 4);
   .block { margin-top: clamp(4rem, 8vw, 6.5rem); }
   .block-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.4rem; }
   .all { font-weight: 600; font-size: 0.95rem; }
+  .archive-intro { color: var(--ink-soft); max-width: 34rem; margin-bottom: 1.6rem; }
+  .picks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+  .picks li { background: var(--tint); border-radius: 14px; padding: 1.3rem 1.4rem 1.5rem; }
+  .picks .year { color: var(--ink-soft); margin: 0 0 0.5rem; }
+  .picks a { font-weight: 700; font-size: 1.15rem; letter-spacing: -0.02em; line-height: 1.25; text-decoration: none; }
+  .picks a:hover { text-decoration: underline; text-decoration-color: var(--orange); }
   @media (max-width: 52rem) {
+    .picks { grid-template-columns: 1fr; }
     .hero { grid-template-columns: 1fr; }
     .hero h1 { max-width: 16ch; }
   }

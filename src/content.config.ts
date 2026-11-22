@@ -17,4 +17,14 @@ const notes = defineCollection({
   }),
 });
 
-export const collections = { notes };
+// Posts from the Spatial Miscellany (2007-2010), kept as written.
+const archive = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/archive" }),
+  schema: z.object({
+    title: z.string(),
+    date: z.coerce.date(),
+    original: z.string().url(), // Internet Archive copy of the original post
+  }),
+});
+
+export const collections = { notes, archive };

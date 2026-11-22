@@ -1,0 +1,21 @@
+---
+title: 'The Royal Mail PAF, that old Chestnut…'
+date: 2008-07-10
+original: 'https://web.archive.org/web/2008/http://gisconsultancy.com/blog/politics/the-royal-mail-paf-that-old-chestnut/'
+---
+
+[Tom Watson](https://web.archive.org/web/2008/http://www.tom-watson.co.uk)…MP for West Bromwich East, the UK’s first Parliamentary blogger, and critically, the cabinet office minister responsible for delivering on the Power Of Information report, recently noted [interest](https://web.archive.org/web/2008/http://puffbox.com/2008/06/23/the-power-of-postcodes/) in the issues surrounding access to the Royal Mail Postcode Address File (PAF); Tom was promptly informed it was an ‘[old chestnut](https://web.archive.org/web/2008/http://www.tom-watson.co.uk/?p=2076)’, what on Earth could that mean?
+
+I talked it over with my well informed friend at the council, who cast some light on the interaction between Local Government, the Royal Mail and the Ordnance Survey…
+
+…local government has an inescapable business need to store data about a multitude of non-addressable objects (ATMs, bus shelters, you name it…they probably need it). Ten years ago, no such dataset existed, historically the old OS address products (AddressPoint etc.) only contained entities that received post, as they were all based on the Royal Mail PAF. To address this business need Local Government set about creating a National Land and Property Gazetteer (NLPG) because no dataset existed which met their needs. Now, here is the Chestnut, enter stage left, two government agencies tasked with delivering a Return on Investment\Capital Employed, and a fictional property developer…
+
+Watson PLC decide to build some new properties. Having identified and procured a suitable site and decided what you would like to build the next step, by law, is to apply for Planning Permission from the appropriate local authority. As part of that process you are required to submit detailed, scaled drawings showing precisely what you are proposing to build and where you are proposing to build it. So… local government is always the first to know about new developments.
+
+If you are granted Planning Permission then you are advised to contact the “Street Naming and Numbering Officer” of the Local Authority concerned to agree the addresses of your new properties with them. This is a statutory duty of local government that, legally, no-one else can do (The legislation under which this happens varies but it’s most often Sections 17-19 of the 1925 Public Health Act). If you’re building new streets the Local Authority name them and add them to the National Street Gazetteer. They also allocate the individual property numbers.
+
+Now the daft bit; clearly the only organisation that can assign a postcode to new properties is Royal Mail as postcodes are their property (and exist solely for the purpose of facilitating the delivery of mail by Royal Mail). The Local Authority Street Naming and Numbering Officer therefore has to ***give***  their new addresses to Royal Mail for them to add the postcode and, if one is necessary, the post town. As soon as an address contains a postcode it becomes Royal Mail’s Intellectual Property as they own postcodes! They then pass the address to OS who geo-code it, link it to the OSMM TOID, stick it in Address Layer 2 and ***sell it*** !
+
+The real choker for Local Government and the UK tax payer is that if Local Government wishes to use address data with postcodes in, which of course they have to, then they have to pay royalties to Royal Mail to do so! They are forced to spend taxpayers money ***“buying back”***  address data most of which they created in the first place!
+
+…my friend at the council puts his spin on the process to underline his frustration, just as the man from the OS, or the woman from the Royal Mail might put their spin on the process to underline their frustration. But the real issue here is…this is the system working?! All organisations are doing a good job, working to direction from the government, and delivering their targets. However, this doesn’t disguise the fact that… millions of pounds of tax payers money is being spent in duplicating what should be a single, definite and **accessible**  resource.

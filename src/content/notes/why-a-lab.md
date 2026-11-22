@@ -1,7 +1,7 @@
 ---
 title: Why a lab
 date: 2026-11-22
-summary: What this lab is for, and why it's in the open.
+summary: Things are going to change, and nobody quite knows how. This is where I try things out, share what I find, and learn from others.
 kind: essay
 map: north-sea
 mapCaption: The North Sea from open data. Fields in orange, pipelines and offshore wind in blue.
@@ -11,7 +11,13 @@ GIS work has always come in three parts you get separately. The software, which 
 
 AI is starting to pull those together. You can ask for a piece of GIS work in plain English and get something back that runs. Not always right. Often enough that I've stopped thinking of AI as a feature on the side of GIS, and started thinking of it as the way in.
 
-I don't think that makes GIS analysts redundant. I think it makes a good one faster, and more thorough. But that's only an opinion, and the honest thing is to test it.
+I don't know how this is going to play out. I do know things are going to change, and I find that quite exciting. My hunch is that AI makes a good GIS analyst faster and more thorough rather than redundant, but that's only a hunch.
+
+## Working out loud
+
+So rather than wait and see, I'd like to try things, share what I find, and learn from other people doing the same. That's what this lab is for.
+
+It's not a new habit. In the late 2000s I wrote a blog called the Spatial Miscellany, mostly about open data, the geoweb and whatever I'd been tinkering with at the weekend. Some of those posts are now [in the archive](/archive). A few have aged better than others.
 
 ## What goes in here
 
