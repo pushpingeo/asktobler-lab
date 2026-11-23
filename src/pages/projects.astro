@@ -1,16 +1,22 @@
 ---
+import TinaIsland from "@tinacms/astro/TinaIsland.astro";
 import Base from "../layouts/Base.astro";
 import ProjectRow from "../components/ProjectRow.astro";
-import { projects } from "../data/projects";
+import SectionIntro from "../components/islands/SectionIntro.astro";
+import { islands } from "../lib/islands";
+import { getPage, getProject, listProjects } from "../lib/tina";
+const page = (await getPage("projects")).data.pages;
+const projects = await Promise.all((await listProjects()).map(async (slug) => (await getProject(slug)).data.projects));
 ---
-<Base title="Projects" description="Working experiments in geography and AI: live demos, tools and evaluations.">
+<Base title={"title" in page ? page.title : "Projects"} description={"description" in page ? page.description ?? undefined : undefined}>
   <section class="wrap">
-    <h1>Projects</h1>
-    <p class="intro">Each one sets out to show a single thing. Most run in your browser on open data, and the code is all on GitHub.</p>
-    {projects.map((p) => <ProjectRow project={p} detail />)}
+    <TinaIsland name="section" wrapper={islands.section.wrapper} params={{ page: "projects" }} primary>
+      <SectionIntro page={page} />
+    </TinaIsland>
+    {projects.map((p) => (
+      <TinaIsland name="project" wrapper={islands.project.wrapper} params={{ slug: p._sys.filename, detail: 1 }}>
+        <ProjectRow project={p} detail />
+      </TinaIsland>
+    ))}
   </section>
 </Base>
-<style>
-  h1 { margin: 1.5rem 0 1rem; }
-  .intro { font-size: 1.2rem; max-width: 34rem; margin-bottom: 2.5rem; }
-</style>

@@ -2,55 +2,51 @@
 
 Rob Dunfey's open lab: small, working experiments in what happens when AI becomes the interface to geography. Static site built with [Astro](https://astro.build), hosted on Cloudflare Pages.
 
-## Writing a note
+## Editing the site
 
-1. Add a markdown file to `src/content/notes/`, e.g. `my-note.md`. The file name becomes the address (`/notes/my-note`).
-2. Front matter:
-   ```yaml
-   ---
-   title: One question, three engines
-   date: 2026-11-22
-   summary: One or two sentences for lists, RSS and link previews.
-   kind: experiment        # experiment, essay or field note
-   map: engines            # optional: a map from src/maps to lead the piece
-   mapCaption: Optional caption under the map.
-   draft: false            # true = only shows when running locally
-   ---
-   ```
-3. Open a pull request. Cloudflare builds a preview link for it. Check it on your phone, then merge to publish.
+Every piece of text on the site can be edited in the browser with [TinaCMS](https://tina.io):
 
-## Projects
+1. Go to **asktobler.ai/admin** and log in with your Tina Cloud account.
+2. Pick a page, or just browse to it in the preview. Click any text on the page and the matching box opens on the left. The page updates as you type.
+3. Click **Save**. Tina commits the change to GitHub, and Cloudflare rebuilds the site in a minute or two.
 
-Edit `src/data/projects.ts`. Each project has one point it makes, a status (Live, Building, Write-up coming), a map and links.
+Notes and archive posts have an image button in the text editor. Uploaded pictures are stored in `public/images/`.
+
+What's where, if you'd rather edit the files directly:
+
+| What | File |
+|---|---|
+| Name, tagline, menu, footer, links, the `launched` switch | `src/content/settings/site.json` |
+| Home, About, Projects, Notes, Archive and 404 page text | `src/content/pages/*.md` |
+| Projects (one file each, `order` sets the order) | `src/content/projects/*.md` |
+| Notes | `src/content/notes/*.md` |
+| Earlier writing | `src/content/archive/*.md` |
+
+The fields each file can have are defined in `tina/config.ts`. A new note needs a title, date, summary and kind; `draft: true` keeps it off the live site.
+
+While `launched` is false, every page tells search engines not to index it and `robots.txt` blocks crawlers. The site is still public, just not promoted.
 
 ## Maps
 
 The maps are SVGs drawn from real open data by `scripts/make_maps.py` (NSTA and Crown Estate layers from `pushpingeo/north-sea-geo-demo`, licence blocks from `pushpingeo/simops-radar`, coastline from Natural Earth). They're inlined into pages so they use the site's fonts and colours (`src/styles/maps.css`). Run the script's docstring command to redraw them.
 
-## Settings
-
-`src/site.config.ts` holds the name, tagline, links, and the `launched` switch. While `launched` is false, every page tells search engines not to index it and `robots.txt` blocks crawlers. The site is still public, just not promoted.
-
 ## Run it locally
 
 ```bash
 npm install
-npm run dev      # http://localhost:4321
-npm run build    # output in dist/
+npm run dev          # site at http://localhost:4321, editor at http://localhost:4321/admin
+npm run build:local  # build without Tina Cloud; output in dist/
 ```
 
-## Hosting on Cloudflare Pages
+Locally, Tina saves straight to the files on disk, with no login.
 
-1. Cloudflare dashboard: Workers & Pages, Create, Pages, Connect to Git, pick `pushpingeo/asktobler-lab`.
-2. Framework preset: Astro. Build command `npm run build`, output directory `dist`.
-3. Custom domains: add `asktobler.ai` (and `www.asktobler.ai` if you want it).
-4. Optional: Web Analytics on the project, which is cookie-free.
+## Hosting on Cloudflare Workers
 
-Every pull request then gets its own preview URL.
+Pages are still static HTML, but Tina's live preview needs one small server route (`/tina-island`), so the site runs as a Cloudflare Worker rather than on Cloudflare Pages.
 
-## Editing an article in the browser
+1. Cloudflare dashboard: Workers & Pages, Create, Import a repository, pick `pushpingeo/asktobler-lab`.
+2. Build command `npm run build`. Deploy command `npx wrangler deploy -c dist/server/wrangler.json`.
+3. Variables and secrets (for the build): `PUBLIC_TINA_CLIENT_ID` and `TINA_TOKEN` from [app.tina.io](https://app.tina.io).
+4. Settings, Domains & Routes: add `asktobler.ai`.
 
-1. Open the live site once with `?edit=1` on the end of any address (e.g. `https://asktobler.ai/notes/why-a-lab/?edit=1`). That browser now shows an **Edit this page on GitHub** link under each note and archive post. Nobody else sees it. Use `?edit=0` to hide it again.
-2. The link opens the article's Markdown file in GitHub's editor. Change the text, click **Commit changes**, and Cloudflare rebuilds the site in about a minute.
-
-**Images.** Either drag a picture straight into the GitHub editor (GitHub hosts it and inserts the Markdown for you), or, to keep images in the repo, upload them to `public/images/` with *Add file → Upload files* and write `![What the picture shows](/images/my-picture.jpg)` in the article. The text in square brackets is the alt text for screen readers.
+Branches other than `main` get their own preview address.

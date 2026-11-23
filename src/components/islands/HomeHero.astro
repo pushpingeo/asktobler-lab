@@ -1,0 +1,26 @@
+---
+import TinaMarkdown from "@tinacms/astro/TinaMarkdown.astro";
+import Rich from "../Rich.astro";
+import { tinaField } from "@tinacms/astro/tina-field";
+import type { Page, Settings } from "../../lib/tina";
+interface Props { page: Page; settings: Settings }
+const { page, settings } = Astro.props;
+const home = page.__typename === "PagesHome" ? page : null;
+---
+<h1 data-tina-field={tinaField(settings, "tagline")}>{settings.tagline}</h1>
+{home && (
+  <>
+    <div class="lede" data-tina-field={tinaField(home, "body")}><Rich><TinaMarkdown content={home.body} /></Rich></div>
+    <p class="hero-links" data-tina-field={tinaField(home, "buttons")}>
+      {(home.buttons ?? []).map((b) => b && (
+        <a class:list={["btn", { "btn-dark": b.style === "dark" }]} href={b.href}>{b.label}</a>
+      ))}
+    </p>
+  </>
+)}
+<style>
+  h1 { margin-bottom: 1.8rem; max-width: 12ch; }
+  .lede { font-size: 1.2rem; max-width: 30rem; color: var(--ink-soft); }
+  .hero-links { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 2rem; }
+  @media (max-width: 52rem) { h1 { max-width: 16ch; } }
+</style>

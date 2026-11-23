@@ -1,9 +1,15 @@
 ---
+import TinaIsland from "@tinacms/astro/TinaIsland.astro";
 import Base from "../layouts/Base.astro";
+import SectionIntro from "../components/islands/SectionIntro.astro";
+import { islands } from "../lib/islands";
+import { getPage } from "../lib/tina";
+const page = (await getPage("not-found")).data.pages;
 ---
 <Base title="Not found">
   <section class="wrap" style="margin-top:2rem">
-    <h1>Off the edge of the map</h1>
-    <p style="margin-top:1rem;font-size:1.2rem">There's no page here. Try the <a href="/projects">projects</a> or the <a href="/notes">notes</a>.</p>
+    <TinaIsland name="section" wrapper={islands.section.wrapper} params={{ page: "not-found" }} primary>
+      <SectionIntro page={page} />
+    </TinaIsland>
   </section>
 </Base>

@@ -1,0 +1,18 @@
+---
+import { tinaField } from "@tinacms/astro/tina-field";
+import type { Page } from "../../lib/tina";
+interface Props { page: Page; which: "projects" | "notes" }
+const { page, which } = Astro.props;
+const home = page.__typename === "PagesHome" ? page : null;
+const heading = which === "projects" ? "projectsHeading" : "notesHeading";
+const link = which === "projects" ? "projectsLink" : "notesLink";
+---
+{home && (
+  <>
+    <h2 data-tina-field={tinaField(home, heading)}>{home[heading]}</h2>
+    <a class="all" href={`/${which}`} data-tina-field={tinaField(home, link)}>{home[link]}</a>
+  </>
+)}
+<style>
+  .all { font-weight: 600; font-size: 0.95rem; }
+</style>

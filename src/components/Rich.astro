@@ -1,0 +1,7 @@
+---
+// Wraps a <TinaMarkdown> so its text gets curly quotes like the rest of the
+// site (Astro's own Markdown does this automatically; Tina's renderer doesn't).
+import { smartQuotes } from "../lib/smart-quotes";
+const html = Astro.slots.has("default") ? smartQuotes(await Astro.slots.render("default")) : "";
+---
+<Fragment set:html={html} />

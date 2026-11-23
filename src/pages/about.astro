@@ -1,32 +1,13 @@
 ---
+import TinaIsland from "@tinacms/astro/TinaIsland.astro";
 import Base from "../layouts/Base.astro";
-import { SITE } from "../site.config";
+import AboutBody from "../components/islands/AboutBody.astro";
+import { islands } from "../lib/islands";
+import { getPage } from "../lib/tina";
+const page = (await getPage("about")).data.pages;
 ---
-<Base title="About" description="About Tobler Lab and Rob Dunfey, who runs it.">
-  <section class="wrap about">
-    <img class="photo" src="/rob.jpg" width="800" height="800" alt="Rob Dunfey, smiling, outdoors in a checked shirt" />
-    <div class="prose">
-      <h1>About</h1>
-      <p>I'm Rob Dunfey. I work in geospatial data and live in Scotland. I started out as a product engineer at Esri, and have worked in geomatics in the energy industry since.</p>
-      <p>This lab is where I try things out in my own time: small, working experiments with maps, data and AI, tested as properly as I can manage, and written up whether they worked or not.</p>
-      <p>My view so far is that AI makes a good GIS analyst faster and more thorough, rather than replacing one. I'm happy to be proved wrong.</p>
-      <p>Before the lab I wrote a blog, the Spatial Miscellany, and later on LinkedIn. Some of that earlier writing is in the <a href="/archive">archive</a>.</p>
-      <h2>The name</h2>
-      <p>Waldo Tobler's first law of geography says that everything is related to everything else, but near things are more related than distant things. It's the nearest thing my field has to a motto. Tobler is also the name of the site-screening tool I'm building, which will live at asktobler.com once it's ready.</p>
-      <h2>Get in touch</h2>
-      <p>If something here is useful, wrong, or worth a conversation, I'd like to hear about it.
-        {SITE.links.linkedin && <> Find me on <a href={SITE.links.linkedin}>LinkedIn</a>.</>}
-        {SITE.links.email && <> Email <a href={`mailto:${SITE.links.email}`}>{SITE.links.email}</a>.</>}
-        {" "}The code for everything is on <a href={SITE.links.github}>GitHub</a>.
-      </p>
-      <p class="small">Everything here is built in my own time, on open data. Views are my own, not my employer's.</p>
-    </div>
-  </section>
+<Base title={"title" in page ? page.title : "About"} description={"description" in page ? page.description ?? undefined : undefined}>
+  <TinaIsland name="about" wrapper={islands.about.wrapper} primary>
+    <AboutBody page={page} />
+  </TinaIsland>
 </Base>
-<style>
-  .about { display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: clamp(1.5rem, 5vw, 4rem); align-items: start; margin-top: 1.5rem; }
-  .about h1 { margin-bottom: 1.2rem; }
-  .photo { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 50%; }
-  .small { font-size: 0.95rem; color: var(--ink-soft); }
-  @media (max-width: 44rem) { .about { grid-template-columns: 1fr; } .photo { max-width: 12rem; } }
-</style>

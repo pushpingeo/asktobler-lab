@@ -1,0 +1,71 @@
+---
+import TinaMarkdown from "@tinacms/astro/TinaMarkdown.astro";
+import Rich from "../Rich.astro";
+import { tinaField } from "@tinacms/astro/tina-field";
+import { formatDate } from "../../lib/notes";
+import type { Page } from "../../lib/tina";
+type Post = { slug: string; title: string; date: Date; source: string };
+interface Props { page: Page; posts: Post[] }
+const { page, posts } = Astro.props;
+const a = page.__typename === "PagesArchive" ? page : null;
+const linkedin = posts.filter((p) => p.source === "linkedin").reverse();
+const blog = posts.filter((p) => p.source === "spatial-miscellany");
+const years = [...new Set(blog.map((p) => p.date.getFullYear()))];
+---
+{a && (
+  <>
+    <h1 data-tina-field={tinaField(a, "title")}>{a.title}</h1>
+    <div class="intro" data-tina-field={tinaField(a, "body")}><Rich><TinaMarkdown content={a.body} /></Rich></div>
+
+    <section class="group">
+      <h2 data-tina-field={tinaField(a, "linkedinHeading")}>{a.linkedinHeading}</h2>
+      <p class="group-intro" data-tina-field={tinaField(a, "linkedinIntro")}>{a.linkedinIntro}</p>
+      <ol class="list">
+        {linkedin.map((p) => (
+          <li>
+            <a href={`/archive/${p.slug}`}>{p.title}</a>
+            <span class="ui date">{formatDate(p.date)}</span>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="group">
+      <h2 data-tina-field={tinaField(a, "blogHeading")}>{a.blogHeading}</h2>
+      <p class="group-intro" data-tina-field={tinaField(a, "blogIntro")}>{a.blogIntro}</p>
+      {years.map((y) => (
+        <div class="year">
+          <h3>{y}</h3>
+          <ol class="list">
+            {blog.filter((p) => p.date.getFullYear() === y).map((p) => (
+              <li>
+                <a href={`/archive/${p.slug}`}>{p.title}</a>
+                <span class="ui date">{formatDate(p.date)}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      ))}
+    </section>
+  </>
+)}
+<style>
+  h1 { margin: 1.5rem 0 1rem; }
+  .intro { font-size: 1.15rem; max-width: 36rem; margin-bottom: 2.5rem; color: var(--ink-soft); }
+  .intro :global(p) { margin: 0; }
+  .group { margin-bottom: 3.5rem; }
+  .group h2 { margin-bottom: 0.8rem; }
+  .group-intro { color: var(--ink-soft); max-width: 40rem; margin-bottom: 1.4rem; }
+  .year { display: grid; grid-template-columns: 8rem minmax(0, 1fr); gap: 1rem; padding: 1.2rem 0; border-top: 1px solid var(--rule); }
+  .year h3 { font-size: 1.4rem; }
+  .list { list-style: none; margin: 0; padding: 0; max-width: 46rem; }
+  .group > .list { border-top: 1px solid var(--rule); padding-top: 1rem; }
+  .list li { display: flex; justify-content: space-between; gap: 1rem; align-items: baseline; padding: 0.35rem 0; }
+  .list a { font-weight: 600; text-decoration: none; }
+  .list a:hover { text-decoration: underline; text-decoration-color: var(--orange); }
+  .date { color: var(--ink-soft); white-space: nowrap; }
+  @media (max-width: 40rem) {
+    .year { grid-template-columns: 1fr; gap: 0.4rem; }
+    .list li { flex-direction: column; gap: 0; padding: 0.5rem 0; }
+  }
+</style>

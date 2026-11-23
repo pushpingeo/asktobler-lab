@@ -1,0 +1,26 @@
+---
+import TinaMarkdown from "@tinacms/astro/TinaMarkdown.astro";
+import Rich from "../Rich.astro";
+import { tinaField } from "@tinacms/astro/tina-field";
+import type { Page } from "../../lib/tina";
+interface Props { page: Page }
+const { page } = Astro.props;
+const home = page.__typename === "PagesHome" ? page : null;
+const k = home?.mapKey;
+---
+{home && (
+  <>
+    <div class="key" aria-hidden="true">
+      <span data-tina-field={k && tinaField(k, "fields")}><i class="k-field"></i>{k?.fields}</span>
+      <span data-tina-field={k && tinaField(k, "pipelines")}><i class="k-pipe"></i>{k?.pipelines}</span>
+      <span data-tina-field={k && tinaField(k, "wind")}><i class="k-wind"></i>{k?.wind}</span>
+      <span data-tina-field={k && tinaField(k, "licences")}><i class="k-lic"></i>{k?.licences}</span>
+      <span data-tina-field={k && tinaField(k, "wells")}><i class="k-well"></i>{k?.wells}</span>
+    </div>
+    <div class="credit" data-tina-field={tinaField(home, "mapCaption")}><Rich><TinaMarkdown content={home.mapCaption} /></Rich></div>
+  </>
+)}
+<style>
+  .credit { margin: 0.6rem 0 0; max-width: 34rem; }
+  .credit :global(p) { margin: 0; }
+</style>

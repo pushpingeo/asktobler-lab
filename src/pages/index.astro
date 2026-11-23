@@ -1,74 +1,59 @@
 ---
+import TinaIsland from "@tinacms/astro/TinaIsland.astro";
 import Base from "../layouts/Base.astro";
 import Map from "../components/Map.astro";
 import ProjectRow from "../components/ProjectRow.astro";
 import NoteList from "../components/NoteList.astro";
-import { projects } from "../data/projects";
-import { SITE } from "../site.config";
+import HomeHero from "../components/islands/HomeHero.astro";
+import HomeMapCaption from "../components/islands/HomeMapCaption.astro";
+import BlockHead from "../components/islands/BlockHead.astro";
+import { islands } from "../lib/islands";
 import { getNotes } from "../lib/notes";
+import { getPage, getSettings, getProject, listProjects } from "../lib/tina";
 
 const notes = (await getNotes()).slice(0, 4);
+const page = (await getPage("home")).data.pages;
+const settings = (await getSettings()).data.settings;
+const projects = await Promise.all((await listProjects()).slice(0, 3).map(async (slug) => (await getProject(slug)).data.projects));
 ---
 <Base>
   <section class="hero wrap">
-    <div class="hero-text">
-      <h1>{SITE.tagline}</h1>
-      <p class="lede">
-        A small, open lab for experiments in what happens when AI becomes the way in to
-        geography. Most of them run in your browser, on open data.
-      </p>
-      <p class="lede">Some work. Some don't. Both get written up.</p>
-      <p class="hero-links">
-        <a class="btn" href="/projects">See the projects</a>
-        <a class="btn btn-dark" href="/notes/why-a-lab">Why a lab</a>
-      </p>
-    </div>
+    <TinaIsland name="home-hero" wrapper={islands["home-hero"].wrapper} primary>
+      <HomeHero page={page} settings={settings} />
+    </TinaIsland>
     <figure class="hero-map">
       <Map name="north-sea" />
-      <figcaption class="ui">
-        <div class="key" aria-hidden="true">
-          <span><i class="k-field"></i>Oil and gas fields</span>
-          <span><i class="k-pipe"></i>Pipelines</span>
-          <span><i class="k-wind"></i>Offshore wind</span>
-          <span><i class="k-lic"></i>Licences</span>
-          <span><i class="k-well"></i>Wells</span>
-        </div>
-        <p class="credit">The North Sea, drawn from open data: NSTA, The Crown Estate and Natural Earth.
-        The same data sits behind <a href="/projects#three-engines">One question, three engines</a>.</p>
-      </figcaption>
+      <TinaIsland name="home-map" wrapper={islands["home-map"].wrapper}>
+        <HomeMapCaption page={page} />
+      </TinaIsland>
     </figure>
   </section>
 
   <section class="wrap block">
-    <div class="block-head">
-      <h2>What I'm working on</h2>
-      <a class="all" href="/projects">All projects</a>
-    </div>
-    {projects.slice(0, 3).map((p) => <ProjectRow project={p} />)}
+    <TinaIsland name="block-head" wrapper={islands["block-head"].wrapper} params={{ which: "projects" }}>
+      <BlockHead page={page} which="projects" />
+    </TinaIsland>
+    {projects.map((p) => (
+      <TinaIsland name="project" wrapper={islands.project.wrapper} params={{ slug: p._sys.filename, detail: 0 }}>
+        <ProjectRow project={p} />
+      </TinaIsland>
+    ))}
   </section>
 
   <section class="wrap block">
-    <div class="block-head">
-      <h2>Latest notes</h2>
-      <a class="all" href="/notes">All notes</a>
-    </div>
+    <TinaIsland name="block-head" wrapper={islands["block-head"].wrapper} params={{ which: "notes" }}>
+      <BlockHead page={page} which="notes" />
+    </TinaIsland>
     <NoteList notes={notes} />
   </section>
-
 </Base>
 
 <style>
   .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; padding-top: clamp(1rem, 4vw, 3rem); }
-  .hero h1 { margin-bottom: 1.8rem; max-width: 12ch; }
-  .lede { font-size: 1.2rem; max-width: 30rem; color: var(--ink-soft); }
-  .hero-links { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 2rem; }
   .hero-map { margin: 0; }
-  .credit { margin: 0.6rem 0 0; max-width: 34rem; }
   .block { margin-top: clamp(4rem, 8vw, 6.5rem); }
-  .block-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.4rem; }
-  .all { font-weight: 600; font-size: 0.95rem; }
+  .block :global(.block-head) { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.4rem; }
   @media (max-width: 52rem) {
     .hero { grid-template-columns: 1fr; }
-    .hero h1 { max-width: 16ch; }
   }
 </style>

@@ -7,7 +7,7 @@ export async function getNotes() {
 }
 
 export function formatDate(d: Date) {
-  return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+  return d.toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/London" });
 }
 
 /** Spatial Miscellany posts, oldest first. */

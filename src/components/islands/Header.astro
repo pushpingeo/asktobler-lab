@@ -1,0 +1,14 @@
+---
+import { tinaField } from "@tinacms/astro/tina-field";
+import type { Settings } from "../../lib/tina";
+interface Props { settings: Settings; path?: string }
+const { settings: s, path = "" } = Astro.props;
+---
+<div class="wrap">
+  <a class="wordmark" href="/" data-tina-field={tinaField(s, "name")}>{s.name}</a>
+  <nav class="nav" aria-label="Main" data-tina-field={tinaField(s, "nav")}>
+    {(s.nav ?? []).map((n) => n && (
+      <a href={n.href} aria-current={n.href && path.startsWith(n.href) ? "page" : undefined}>{n.label}</a>
+    ))}
+  </nav>
+</div>

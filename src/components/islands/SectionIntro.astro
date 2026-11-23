@@ -1,0 +1,16 @@
+---
+import TinaMarkdown from "@tinacms/astro/TinaMarkdown.astro";
+import Rich from "../Rich.astro";
+import { tinaField } from "@tinacms/astro/tina-field";
+import type { Page } from "../../lib/tina";
+interface Props { page: Page }
+const { page } = Astro.props;
+const body = "body" in page ? page.body : null;
+---
+<h1 data-tina-field={tinaField(page, "title")}>{"title" in page ? page.title : ""}</h1>
+<div class="intro" data-tina-field={tinaField(page, "body")}><Rich><TinaMarkdown content={body} /></Rich></div>
+<style>
+  h1 { margin: 1.5rem 0 1rem; }
+  .intro { font-size: 1.2rem; max-width: 34rem; margin-bottom: 2.5rem; }
+  .intro :global(p) { margin: 0; }
+</style>

@@ -1,0 +1,35 @@
+---
+import TinaMarkdown from "@tinacms/astro/TinaMarkdown.astro";
+import Rich from "../Rich.astro";
+import { tinaField } from "@tinacms/astro/tina-field";
+import Map from "../Map.astro";
+import { formatDate } from "../../lib/notes";
+import type { Note } from "../../lib/tina";
+interface Props { note: Note }
+const { note: d } = Astro.props;
+const date = new Date(d.date);
+---
+<header>
+  <p class="meta ui"><time datetime={date.toISOString()} data-tina-field={tinaField(d, "date")}>{formatDate(date)}</time>, <span data-tina-field={tinaField(d, "kind")}>{d.kind}</span></p>
+  <h1 data-tina-field={tinaField(d, "title")}>{d.title}</h1>
+  <p class="summary" data-tina-field={tinaField(d, "summary")}>{d.summary}</p>
+</header>
+{d.map && (
+  <figure class="lead-map" data-tina-field={tinaField(d, "map")}>
+    <Map name={d.map} />
+    {d.mapCaption && <figcaption class="ui" data-tina-field={tinaField(d, "mapCaption")}>{d.mapCaption}</figcaption>}
+  </figure>
+)}
+<div class="prose" data-tina-field={tinaField(d, "body")}><Rich><TinaMarkdown content={d.body} /></Rich></div>
+{d.linkedin && <p class="origin ui">First published on LinkedIn on {formatDate(date)}. <a href={d.linkedin}>See the original and its comments</a>.</p>}
+<style>
+  header { max-width: 44rem; margin: 1.5rem 0 2rem; }
+  .meta { color: var(--ink-soft); margin-bottom: 0.6rem; }
+  .summary { font-size: 1.3rem; font-weight: 500; color: var(--ink-soft); margin-top: 1.2rem; line-height: 1.4; }
+  .lead-map { margin: 0 0 2.5rem; max-width: 44rem; }
+  .lead-map :global(.map-wrap) { overflow: hidden; border-radius: 14px; }
+  .lead-map :global(svg.map-thumb) { aspect-ratio: 16 / 10; height: auto; }
+  .lead-map :global(svg.map-hero) { max-height: 75vh; width: auto; max-width: 100%; }
+  .lead-map figcaption { color: var(--ink-soft); margin-top: 0.6rem; }
+  .origin { max-width: var(--measure); margin-top: 2.5rem; padding: 0.9rem 1.1rem; background: var(--tint); border-radius: 10px; color: var(--ink-soft); }
+</style>

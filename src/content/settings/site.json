@@ -1,0 +1,24 @@
+{
+  "name": "Tobler Lab",
+  "tagline": "Near things are more related. So are geography and AI.",
+  "description": "Rob Dunfey's open lab: small, working experiments in what happens when AI becomes the interface to geography.",
+  "nav": [
+    {
+      "label": "Projects",
+      "href": "/projects"
+    },
+    {
+      "label": "Notes",
+      "href": "/notes"
+    },
+    {
+      "label": "About",
+      "href": "/about"
+    }
+  ],
+  "footerNote": "Built in my own time, on open data. Views are my own, not my employer's.",
+  "github": "https://github.com/pushpingeo",
+  "linkedin": "https://www.linkedin.com/in/robdunfey/",
+  "email": "",
+  "launched": false
+}

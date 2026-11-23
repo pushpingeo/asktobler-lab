@@ -1,0 +1,6 @@
+{
+  // Cloudflare Workers settings. nodejs_compat is needed by Tina's editing route.
+  "name": "asktobler-lab",
+  "compatibility_date": "2026-11-01",
+  "compatibility_flags": ["nodejs_compat"]
+}

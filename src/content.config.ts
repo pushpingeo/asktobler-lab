@@ -10,12 +10,12 @@ const notes = defineCollection({
     summary: z.string(),
     kind: z.enum(["experiment", "essay", "field note"]),
     // Name of a map in src/maps (without .svg) to lead the piece.
-    map: z.string().optional(),
-    mapCaption: z.string().optional(),
+    map: z.string().nullish(),
+    mapCaption: z.string().nullish(),
     // Set for pieces first published on LinkedIn.
-    linkedin: z.string().url().optional(),
+    linkedin: z.string().url().or(z.literal("")).nullish(),
     // Drafts build in development only.
-    draft: z.boolean().default(false),
+    draft: z.boolean().nullish().transform((v) => v ?? false),
   }),
 });
 
@@ -30,4 +30,5 @@ const archive = defineCollection({
   }),
 });
 
+// Pages, projects and settings are read through Tina (src/lib/tina.ts) instead.
 export const collections = { notes, archive };

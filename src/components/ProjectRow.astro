@@ -1,19 +1,23 @@
 ---
+import TinaMarkdown from "@tinacms/astro/TinaMarkdown.astro";
+import Rich from "./Rich.astro";
+import { tinaField } from "@tinacms/astro/tina-field";
 import Map from "./Map.astro";
-import type { Project } from "../data/projects";
+import type { Project } from "../lib/tina";
 interface Props { project: Project; detail?: boolean }
 const { project: p, detail = false } = Astro.props;
+const links = (p.links ?? []).filter((l) => l?.href);
 ---
-<article class="project" id={p.slug}>
+<article class="project" id={p._sys.filename}>
   <Map name={p.map} class="thumb" />
   <div class="project-text">
-    <p class="status ui" data-status={p.status}>{p.status}</p>
-    <h3>{p.title}</h3>
-    <p class="point">{p.point}</p>
-    {detail && <p class="body">{p.body}</p>}
-    {(p.links.length > 0 || p.note) && (
-      <p class="links ui">
-        {p.links.map((l) => <a href={l.href}>{l.label}</a>)}
+    <p class="status ui" data-status={p.status} data-tina-field={tinaField(p, "status")}>{p.status}</p>
+    <h3 data-tina-field={tinaField(p, "title")}>{p.title}</h3>
+    <p class="point" data-tina-field={tinaField(p, "point")}>{p.point}</p>
+    {detail && <div class="body" data-tina-field={tinaField(p, "body")}><Rich><TinaMarkdown content={p.body} /></Rich></div>}
+    {(links.length > 0 || p.note) && (
+      <p class="links ui" data-tina-field={tinaField(p, "links")}>
+        {links.map((l) => <a href={l!.href}>{l!.label}</a>)}
         {p.note && <a href={`/notes/${p.note}`}>Read the note</a>}
       </p>
     )}

@@ -1,14 +1,14 @@
 import rss from "@astrojs/rss";
 import type { APIContext } from "astro";
 import { getNotes } from "../lib/notes";
-import { SITE } from "../site.config";
+import settings from "../content/settings/site.json";
 
 export async function GET(context: APIContext) {
   const notes = await getNotes();
   return rss({
-    title: `${SITE.name} notes`,
-    description: SITE.description,
-    site: context.site ?? SITE.url,
+    title: `${settings.name} notes`,
+    description: settings.description,
+    site: context.site ?? "https://asktobler.ai",
     items: notes.map((n) => ({
       title: n.data.title,
       pubDate: n.data.date,

@@ -1,46 +1,26 @@
 ---
-import { render } from "astro:content";
+import TinaIsland from "@tinacms/astro/TinaIsland.astro";
 import Base from "../../layouts/Base.astro";
-import Map from "../../components/Map.astro";
-import EditLink from "../../components/EditLink.astro";
-import { getNotes, formatDate } from "../../lib/notes";
+import NoteBody from "../../components/islands/NoteBody.astro";
+import { islands } from "../../lib/islands";
+import { getNotes } from "../../lib/notes";
+import { getNote } from "../../lib/tina";
 
 export async function getStaticPaths() {
   const notes = await getNotes();
-  return notes.map((note) => ({ params: { id: note.id }, props: { note } }));
+  return notes.map((note) => ({ params: { id: note.id } }));
 }
-const { note } = Astro.props;
-const { Content } = await render(note);
-const d = note.data;
+const slug = Astro.params.id!;
+const note = (await getNote(slug)).data.notes;
 ---
-<Base title={d.title} description={d.summary}>
+<Base title={note.title} description={note.summary}>
   <article class="wrap note">
-    <header>
-      <p class="meta ui"><time datetime={d.date.toISOString()}>{formatDate(d.date)}</time>, {d.kind}</p>
-      <h1>{d.title}</h1>
-      <p class="summary">{d.summary}</p>
-    </header>
-    {d.map && (
-      <figure class="lead-map">
-        <Map name={d.map} />
-        {d.mapCaption && <figcaption class="ui">{d.mapCaption}</figcaption>}
-      </figure>
-    )}
-    <div class="prose"><Content /></div>
-    {d.linkedin && <p class="origin ui">First published on LinkedIn on {formatDate(d.date)}. <a href={d.linkedin}>See the original and its comments</a>.</p>}
-    <EditLink file={note.filePath} />
+    <TinaIsland name="note" wrapper={islands.note.wrapper} params={{ slug }} primary>
+      <NoteBody note={note} />
+    </TinaIsland>
     <p class="back ui"><a href="/notes">All notes</a></p>
   </article>
 </Base>
 <style>
-  .note header { max-width: 44rem; margin: 1.5rem 0 2rem; }
-  .meta { color: var(--ink-soft); margin-bottom: 0.6rem; }
-  .summary { font-size: 1.3rem; font-weight: 500; color: var(--ink-soft); margin-top: 1.2rem; line-height: 1.4; }
-  .lead-map { margin: 0 0 2.5rem; max-width: 44rem; }
-  .lead-map :global(.map-wrap) { overflow: hidden; border-radius: 14px; }
-  .lead-map :global(svg.map-thumb) { aspect-ratio: 16 / 10; height: auto; }
-  .lead-map :global(svg.map-hero) { max-height: 75vh; width: auto; max-width: 100%; }
-  .lead-map figcaption { color: var(--ink-soft); margin-top: 0.6rem; }
   .back { margin-top: 3rem; }
-  .origin { max-width: var(--measure); margin-top: 2.5rem; padding: 0.9rem 1.1rem; background: var(--tint); border-radius: 10px; color: var(--ink-soft); }
 </style>

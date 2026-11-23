@@ -1,0 +1,26 @@
+---
+import TinaMarkdown from "@tinacms/astro/TinaMarkdown.astro";
+import Rich from "../Rich.astro";
+import { tinaField } from "@tinacms/astro/tina-field";
+import type { Page } from "../../lib/tina";
+interface Props { page: Page }
+const { page } = Astro.props;
+const about = page.__typename === "PagesAbout" ? page : null;
+---
+{about && (
+  <div class="about">
+    <img class="photo" src={about.photo ?? "/rob.jpg"} width="800" height="800" alt={about.photoAlt ?? ""} data-tina-field={tinaField(about, "photo")} />
+    <div class="prose">
+      <h1 data-tina-field={tinaField(about, "title")}>{about.title}</h1>
+      <div data-tina-field={tinaField(about, "body")}><Rich><TinaMarkdown content={about.body} /></Rich></div>
+      {about.smallPrint && <p class="small" data-tina-field={tinaField(about, "smallPrint")}>{about.smallPrint}</p>}
+    </div>
+  </div>
+)}
+<style>
+  .about { display: grid; grid-template-columns: 14rem minmax(0, 1fr); gap: clamp(1.5rem, 5vw, 4rem); align-items: start; margin-top: 1.5rem; }
+  .about h1 { margin-bottom: 1.2rem; }
+  .photo { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 50%; }
+  .small { font-size: 0.95rem; color: var(--ink-soft); }
+  @media (max-width: 44rem) { .about { grid-template-columns: 1fr; } .photo { max-width: 12rem; } }
+</style>

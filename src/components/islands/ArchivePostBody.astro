@@ -1,0 +1,26 @@
+---
+import TinaMarkdown from "@tinacms/astro/TinaMarkdown.astro";
+import Rich from "../Rich.astro";
+import { tinaField } from "@tinacms/astro/tina-field";
+import { formatDate } from "../../lib/notes";
+import type { ArchivePost } from "../../lib/tina";
+interface Props { post: ArchivePost }
+const { post: d } = Astro.props;
+const date = new Date(d.date);
+const fromLinkedIn = d.source === "linkedin";
+const where = fromLinkedIn ? "LinkedIn" : "the Spatial Miscellany";
+---
+<header>
+  <p class="meta ui"><a href="/archive">Archive</a>: from {where}, <span data-tina-field={tinaField(d, "date")}>{formatDate(date)}</span></p>
+  <h1 data-tina-field={tinaField(d, "title")}>{d.title}</h1>
+</header>
+<div class="prose" data-tina-field={tinaField(d, "body")}><Rich><TinaMarkdown content={d.body} /></Rich></div>
+{fromLinkedIn
+  ? <p class="note ui">First published on LinkedIn on {formatDate(date)}. <a href={d.original}>See the original and its comments</a>.</p>
+  : <p class="note ui">Kept as originally written. Images haven't survived, and links go to archived copies. <a href={d.original}>See the original page</a>.</p>}
+<style>
+  header { max-width: 44rem; margin: 1.5rem 0 2rem; }
+  .meta { color: var(--ink-soft); margin-bottom: 0.8rem; }
+  h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); }
+  .note { max-width: var(--measure); margin-top: 2.5rem; padding: 0.9rem 1.1rem; background: var(--tint); border-radius: 10px; color: var(--ink-soft); }
+</style>

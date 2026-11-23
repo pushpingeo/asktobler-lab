@@ -1,45 +1,37 @@
 ---
-import { render } from "astro:content";
+import TinaIsland from "@tinacms/astro/TinaIsland.astro";
 import Base from "../../layouts/Base.astro";
-import EditLink from "../../components/EditLink.astro";
+import ArchivePostBody from "../../components/islands/ArchivePostBody.astro";
+import { islands } from "../../lib/islands";
 import { getArchive, formatDate } from "../../lib/notes";
+import { getArchivePost } from "../../lib/tina";
 
 export async function getStaticPaths() {
   const posts = await getArchive();
   return posts.map((post) => {
     const same = posts.filter((p) => p.data.source === post.data.source);
     const i = same.indexOf(post);
-    return { params: { id: post.id }, props: { post, prev: same[i - 1], next: same[i + 1] } };
+    const link = (p?: typeof post) => p && { id: p.id, title: p.data.title };
+    return { params: { id: post.id }, props: { prev: link(same[i - 1]), next: link(same[i + 1]) } };
   });
 }
-const { post, prev, next } = Astro.props;
-const { Content } = await render(post);
-const d = post.data;
-const fromLinkedIn = d.source === "linkedin";
-const where = fromLinkedIn ? "LinkedIn" : "the Spatial Miscellany";
+const { prev, next } = Astro.props;
+const slug = Astro.params.id!;
+const post = (await getArchivePost(slug)).data.archive;
+const where = post.source === "linkedin" ? "LinkedIn" : "the Spatial Miscellany";
 ---
-<Base title={d.title} description={`From ${where}, ${formatDate(d.date)}.`}>
+<Base title={post.title} description={`From ${where}, ${formatDate(new Date(post.date))}.`}>
   <article class="wrap">
-    <header>
-      <p class="meta ui"><a href="/archive">Archive</a>: from {where}, {formatDate(d.date)}</p>
-      <h1>{d.title}</h1>
-    </header>
-    <div class="prose"><Content /></div>
-    {fromLinkedIn
-      ? <p class="note ui">First published on LinkedIn on {formatDate(d.date)}. <a href={d.original}>See the original and its comments</a>.</p>
-      : <p class="note ui">Kept as originally written. Images haven't survived, and links go to archived copies. <a href={d.original}>See the original page</a>.</p>}
-    <EditLink file={post.filePath} />
+    <TinaIsland name="archive-post" wrapper={islands["archive-post"].wrapper} params={{ slug }} primary>
+      <ArchivePostBody post={post} />
+    </TinaIsland>
     <nav class="pager ui" aria-label="More from the archive">
-      {prev ? <a href={`/archive/${prev.id}`}>Older: {prev.data.title}</a> : <span />}
-      {next ? <a href={`/archive/${next.id}`}>Newer: {next.data.title}</a> : <span />}
+      {prev ? <a href={`/archive/${prev.id}`}>Older: {prev.title}</a> : <span />}
+      {next ? <a href={`/archive/${next.id}`}>Newer: {next.title}</a> : <span />}
     </nav>
   </article>
 </Base>
 <style>
-  header { max-width: 44rem; margin: 1.5rem 0 2rem; }
-  .meta { color: var(--ink-soft); margin-bottom: 0.8rem; }
-  h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); }
-  .note { max-width: var(--measure); margin-top: 2.5rem; padding: 0.9rem 1.1rem; background: var(--tint); border-radius: 10px; color: var(--ink-soft); }
   .pager { display: flex; justify-content: space-between; gap: 1.5rem; margin-top: 2rem; max-width: var(--measure); font-weight: 600; }
   .pager a:last-child { text-align: right; }
 </style>
