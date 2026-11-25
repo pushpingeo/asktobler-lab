@@ -1,6 +1,6 @@
 # NTR lab: does a written skill make an AI agent better?
 
-Moved here from `pushpingeo/tobler` on 25 November 2026. This is where Tobler started: an agent that screens a project site for environmental and social risk in IFC Performance Standard terms, and an evaluation of it against IFC's own decisions on 45 real projects. Tobler (asktobler.com) has since moved on; this is kept as it was, as a worked example.
+Moved here from `pushpingeo/tobler` on 25 November 2026, and served at [asktobler.ai/ntr-lab/lab.html](https://asktobler.ai/ntr-lab/lab.html). This is where Tobler started: an agent that screens a project site for environmental and social risk in IFC Performance Standard terms, and an evaluation of it against IFC's own decisions on 45 real projects. Tobler (asktobler.com) has since moved on; this is kept as it was, as a worked example.
 
 The write-up is [`lab-writeup.md`](lab-writeup.md). Its links to pushpingeo.github.io/tobler are from the time it was written.
 
@@ -19,14 +19,14 @@ The write-up is [`lab-writeup.md`](lab-writeup.md). Its links to pushpingeo.gith
 | `eval/` | Every run's full trace and summary, and the rules-only baseline |
 | `scripts/` | The evaluation runner, the snapshot fetcher, the rules baseline and the scorer |
 | `test/` | Tests for the tools and the agent loop |
-| `workflows/` | The two GitHub Actions workflows that ran the evaluation and the snapshots. Kept for reference and not active here: to run them, move them to `.github/workflows/`, add the `ANTHROPIC_API_KEY` secret, and set their working directory to `ntr-lab` |
+| `workflows/` | The two GitHub Actions workflows that ran the evaluation and the snapshots. Kept for reference and not active here: to run them, move them to `.github/workflows/`, add the `ANTHROPIC_API_KEY` secret, and set their working directory to `public/ntr-lab` |
 
-None of this is part of the asktobler.ai site build; Astro only builds `src/` and `public/`.
+The folder sits in the site's `public/`, so Astro copies it as it is: everything here is served, scripts and tests included. The pages call Claude through Tobler's Worker, which has to list `https://asktobler.ai` among its allowed origins; otherwise paste your own key.
 
 ## Run it
 
 ```bash
-cd ntr-lab
+cd public/ntr-lab
 npm install
 npm test               # tools and agent loop, no API calls
 npm run serve          # then http://localhost:8000/lab.html
